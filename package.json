@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/13993193075/beat/issues"
   },
-  "homepage": "https://github.com/13993193075/beat#readme"
+  "homepage": "https://github.com/13993193075/beat#readme",
+  "dependencies": {
+    "nodemailer": "^7.0.10"
+  }
 }
