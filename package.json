@@ -1,6 +1,6 @@
 {
-  "name": "beat",
-  "version": "1.0.0",
+  "name": "@yoooloo42/beat",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
