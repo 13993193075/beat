@@ -1,6 +1,6 @@
 {
   "name": "@yoooloo42/beat",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -18,5 +18,12 @@
   "homepage": "https://github.com/13993193075/beat#readme",
   "dependencies": {
     "nodemailer": "^7.0.10"
-  }
+  },
+  "exports": {
+    ".": "./src/index.js",
+    "./libs/*": "./src/libs/*.js"
+  },
+  "files": [
+    "src"
+  ]
 }
