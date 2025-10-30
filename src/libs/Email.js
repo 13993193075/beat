@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import random from '@yoooloo42/bean/utils/random';
 
 /**
  * Node.js 项目中发送电子邮件的函数
@@ -61,32 +62,15 @@ async function sendEmail(to, subject, htmlContent, textContent = '') {
 }
 
 /**
- * 生成指定长度的随机数字验证码
- * @param {number} length - 验证码长度 (默认 6 位)
- * @returns {string} - 随机数字字符串
- */
-function vercode(length = 6) {
-    let code = '';
-    // 确保第一位不是 0，除非长度只有一位
-    code += Math.floor(Math.random() * 9) + 1; 
-
-    for (let i = 1; i < length; i++) {
-        code += Math.floor(Math.random() * 10);
-    }
-    return code;
-}
-
-/**
  * 发送包含验证码的邮件
  * * @param {string} recipientEmail - 收件人邮箱地址
  * @param {number} [codeLength=6] - 验证码长度
  * @param {number} [expirationMinutes=5] - 验证码有效时间（分钟）
  * @returns {Promise<{success: boolean, code?: string, error?: string}>} - 包含发送结果和生成的验证码
  */
-async function sendEmailVercode(recipientEmail, codeLength = 6, expirationMinutes = 5) {
-    
+async function sendVercode(recipientEmail, codeLength = 6, expirationMinutes = 5) {
     // 1. 生成验证码
-    const verificationCode = vercode(codeLength);
+    const verificationCode = random.vercode6(codeLength);
 
     // 2. 构造邮件内容
     const subject = `您的验证码：${verificationCode}，请注意妥善保管，切勿泄露`;
@@ -122,7 +106,6 @@ async function sendEmailVercode(recipientEmail, codeLength = 6, expirationMinute
 
 const beat = {
     sendEmail,
-    vercode,
-    sendEmailVercode
+    sendVercode
 }
 export default beat
