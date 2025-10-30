@@ -1,6 +1,6 @@
 {
   "name": "@yoooloo42/beat",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,8 @@
   },
   "exports": {
     ".": "./src/index.js",
-    "./libs/*": "./src/libs/*.js"
+    "./libs/*": "./src/libs/*.js",,
+    "./libs/crypto/*": "./src/libs/crypto/*.js"
   },
   "files": [
     "src"
