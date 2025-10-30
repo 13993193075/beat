@@ -22,7 +22,7 @@
   },
   "exports": {
     ".": "./src/index.js",
-    "./libs/*": "./src/libs/*.js",,
+    "./libs/*": "./src/libs/*.js",
     "./libs/crypto/*": "./src/libs/crypto/*.js"
   },
   "files": [
