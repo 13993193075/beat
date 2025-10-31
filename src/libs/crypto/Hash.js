@@ -1,4 +1,4 @@
-import crypto from 'src/libs/crypto/Crypto'
+import crypto from 'crypto'
 
 function md5(text){
     if(!text){
