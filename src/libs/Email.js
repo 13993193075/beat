@@ -48,15 +48,15 @@ async function sendEmail(to, subject, htmlContent, textContent = '') {
         // 3. 发送邮件
         let info = await transporter.sendMail(mailOptions);
 
-        console.log('邮件发送成功:');
-        console.log('  收件人:', to);
-        console.log('  主题:', subject);
-        console.log('  Message ID:', info.messageId);
-        
+        console.log('邮件发送成功：');
+        console.log('收件人：', to);
+        console.log('主题：', subject);
+        console.log('Message ID：', info.messageId);
+
         return { success: true, messageId: info.messageId };
         
     } catch (error) {
-        console.error('邮件发送失败:', error);
+        console.error('邮件发送失败：', error);
         return { success: false, error: error.message };
     }
 }
@@ -73,17 +73,16 @@ async function sendVercode(recipientEmail, codeLength = 6, expirationMinutes = 5
     const verificationCode = random.vercode6(codeLength);
 
     // 2. 构造邮件内容
-    const subject = `您的验证码：${verificationCode}，请注意妥善保管，切勿泄露`;
-    
+    const subject = `Email验证码服务`;
     const htmlContent = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; padding: 20px;">
-            <h2 style="color: #333;">验证码通知</h2>
-            <p>您正在进行Email验证码操作，请在页面中输入以下验证码：</p>
+            <h2 style="color: #333;">验证码已发送</h2>
+            <p>以下是您的验证码，请妥善保管：</p>
             <div style="background-color: #f5f5f5; padding: 15px; text-align: center; border-radius: 5px; margin: 20px 0;">
                 <span style="font-size: 30px; font-weight: bold; color: #007bff;">${verificationCode}</span>
             </div>
-            <p style="color: #e44d26;">请注意：该验证码将在 ${expirationMinutes} 分钟内失效。</p>
-            <p style="font-size: 12px; color: #999;">如果不是您本人操作，请忽略此邮件。</p>
+            <p style="color: #e44d26;">注意：该验证码将在 ${expirationMinutes} 分钟内失效</p>
+            <p style="font-size: 12px; color: #999;">如果不是您本人操作，请忽略此邮件</p>
         </div>
     `;
 
