@@ -6,17 +6,6 @@ const require = createRequire(import.meta.url);
 // 引入阿里云 SDK 核心依赖
 const Core = require('@alicloud/pop-core')
 
-const clientBoxInit = {
-    action: 'SendSms',
-    apiVersion: '2017-05-25',
-    accessKeyId: "LTAI5tJeX6TS7bqbLzKxJKrd",
-    accessKeySecret : "qIhbZJaUyYeLI60yXFyT28k1q4uUde",
-    regionId: 'cn-hangzhou', // 短信服务 API 的区域，通常使用杭州(cn-hangzhou)
-    endpoint: 'https://dysmsapi.aliyuncs.com', // 短信服务的 Endpoint
-    signName: 'litafire',
-    templateCode: 'SMS_182679443',
-}
-
 /**
  * 向指定手机号发送短信
  * @param {string} cellphone 接收短信的手机号（例如: '13800000000'）
@@ -24,7 +13,7 @@ const clientBoxInit = {
  * @param {object} clientBox 客户端参数
  * @returns {Promise<object>} 返回阿里云 API 的响应对象
  */
-function sms(cellphone, shortMessageCode, clientBox = clientBoxInit) {
+function sms(cellphone, shortMessageCode, clientBox) {
     return new Promise(function (resolve, reject) {
         const client = new Core({
             accessKeyId: clientBox.accessKeyId,
@@ -83,11 +72,3 @@ const beat = {
     sendVercode
 }
 export default beat
-
-/*
-sendVercode('13993193075').then(result=>{
-    console.log(result.message)
-}).catch(err=>{
-    console.log(err)
-})
-*/

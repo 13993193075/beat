@@ -1,0 +1,10 @@
+const clientBoxInit = {
+    action: 'SendSms',
+    apiVersion: '2017-05-25',
+    accessKeyId: "LTAI5tJeX6TS7bqbLzKxJKrd",
+    accessKeySecret : "qIhbZJaUyYeLI60yXFyT28k1q4uUde",
+    regionId: 'cn-hangzhou', // 短信服务 API 的区域，通常使用杭州(cn-hangzhou)
+    endpoint: 'https://dysmsapi.aliyuncs.com', // 短信服务的 Endpoint
+    signName: 'litafire',
+    templateCode: 'SMS_182679443',
+}
