@@ -13,7 +13,7 @@ const Core = require('@alicloud/pop-core')
  * @param {object} clientBox 客户端参数
  * @returns {Promise<object>} 返回阿里云 API 的响应对象
  */
-const clientBox = {
+const clientBoxInit = {
     action: 'SendSms',
     apiVersion: '2017-05-25',
     regionId: 'cn-hangzhou', // 短信服务 API 的区域，通常使用杭州(cn-hangzhou)
@@ -72,7 +72,7 @@ function sms(cellphone, shortMessageCode, clientBox) {
 function sendVercode(cellphone, codeLength = 6, clientBox){
     return new Promise(function (resolve, reject) {
         const vercode = random.vercode6N(codeLength);
-        sms(cellphone, vercode).then(result=>{
+        sms(cellphone, vercode, clientBox).then(result=>{
             resolve(Object.assign(result, {vercode}))
         })
     })
