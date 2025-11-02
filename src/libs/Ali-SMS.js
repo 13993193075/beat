@@ -48,7 +48,7 @@ function sms(cellphone, shortMessageCode, clientBox) {
 
         client.request(clientBox.action, params, requestOption).then(
             result => {
-                console.log('测试 000', result)
+                console.log('发送短信成功：', result)
                 resolve({code: 0, message: '发送短信成功',
                     result
                 })
@@ -60,6 +60,7 @@ function sms(cellphone, shortMessageCode, clientBox) {
                 */
             },
             err => {
+                console.log('发送短信失败：', err)
                 resolve({code: 1, message: '发送短信失败',
                     err
                 })
