@@ -13,7 +13,17 @@ const Core = require('@alicloud/pop-core')
  * @param {object} clientBox 客户端参数
  * @returns {Promise<object>} 返回阿里云 API 的响应对象
  */
+const clientBoxInit = {
+    action: 'SendSms',
+    apiVersion: '2017-05-25',
+    regionId: 'cn-hangzhou', // 短信服务 API 的区域，通常使用杭州(cn-hangzhou)
+    endpoint: 'https://dysmsapi.aliyuncs.com', // 短信服务的 Endpoint
+    signName: 'litafire',
+    templateCode: 'SMS_497935086'
+}
+
 function sms(cellphone, shortMessageCode, clientBox) {
+    clientBox = Object.assign(clientBoxInit, clientBox)
     return new Promise(function (resolve, reject) {
         const client = new Core({
             accessKeyId: clientBox.accessKeyId,
@@ -36,6 +46,7 @@ function sms(cellphone, shortMessageCode, clientBox) {
 
         client.request(clientBox.action, params, requestOption).then(
             result => {
+                console.log('测试 000', result)
                 resolve({code: 0, message: '发送短信成功',
                     result
                 })
@@ -47,7 +58,9 @@ function sms(cellphone, shortMessageCode, clientBox) {
                 */
             },
             err => {
-                resolve({code: 1, message: '发送短信失败：' + err})
+                resolve({code: 1, message: '发送短信失败',
+                    err
+                })
             }
         )
     })
@@ -56,13 +69,9 @@ function sms(cellphone, shortMessageCode, clientBox) {
 // 发送验证码
 function sendVercode(cellphone, codeLength = 6){
     return new Promise(function (resolve, reject) {
-        const vercode = random.vercode6(codeLength);
+        const vercode = random.vercode6N(codeLength);
         sms(cellphone, vercode).then(result=>{
-            if(result.code === 0){
-                resolve({code: 0, message: `发送验证码${vercode}成功`})
-            }else{
-                resolve({code: 1, message: `发送验证码${vercode}失败`})
-            }
+            resolve(Object.assign(result, {vercode}))
         })
     })
 }
