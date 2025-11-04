@@ -6,6 +6,29 @@ const INPUT_ENCODING = 'utf8';
 const SIGNATURE_FORMAT = 'base64';
 
 /**
+ * 🔑 生成 RSA 密钥对 (公钥和私钥)。
+ *
+ * @returns {Object} 包含公钥和私钥的对象 (PEM 格式)
+ */
+function generateRSAKeyPair() {
+    // 使用 generateKeyPairSync 同步生成 RSA 密钥对
+    const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
+        modulusLength: 2048, // 密钥长度，2048 位是目前推荐的最小安全长度
+        publicKeyEncoding: {
+            type: 'spki',       // SubjectPublicKeyInfo 格式
+            format: 'pem'       // PEM 格式
+        },
+        privateKeyEncoding: {
+            type: 'pkcs8',      // PKCS#8 格式
+            format: 'pem'       // PEM 格式
+            // 生产环境建议添加 cipher: 'aes-256-cbc' 和 passphrase 来加密私钥
+        }
+    });
+
+    return { publicKey, privateKey };
+}
+
+/**
  * 🔐 RSA 签名
  * 使用 'RSA-SHA256' 算法，将输入文本进行签名。
  *
@@ -21,20 +44,15 @@ function rsaSign({ text, privateKey }) {
     }
 
     try {
-        // 使用 const 声明，保持不变性
         const signer = crypto.createSign(ALGORITHM);
-
-        // 优化：将数据直接传递给 update，无需再调用 end()
         signer.update(text, INPUT_ENCODING);
 
-        // 签名，并指定私钥和输出格式
-        // 'base64' 是默认格式，但显式指定更清晰
+        // 签名
         const signature = signer.sign(privateKey, SIGNATURE_FORMAT);
 
         return signature;
 
     } catch (error) {
-        // 捕获密钥格式错误、权限错误等
         console.error(`RSA Signing Error (${ALGORITHM}):`, error.message);
         throw new Error("RSA signing failed. Check private key format and validity.");
     }
@@ -53,21 +71,15 @@ function rsaSign({ text, privateKey }) {
  */
 function rsaVerify({ text, signature, publicKey }) {
     if (!text || !signature || !publicKey) {
-        // 参数缺失时，直接返回 false 或抛出错误，这里选择返回 false 兼容原逻辑，但推荐抛出错误
         console.warn("Missing required parameters for verification.");
         return false;
     }
 
     try {
-        // 使用 const 声明
         const verifier = crypto.createVerify(ALGORITHM);
-
-        // 优化：将数据直接传递给 update
         verifier.update(text, INPUT_ENCODING);
 
         // 验证签名
-        // signature 已经是 Base64 格式的 Buffer，不需要再调用 Buffer.from() 转换
-        // verifier.verify 会自动处理公钥和签名格式
         return verifier.verify(
             publicKey,
             signature,
@@ -75,14 +87,54 @@ function rsaVerify({ text, signature, publicKey }) {
         );
 
     } catch (error) {
-        // 捕获公钥格式错误等
         console.error(`RSA Verification Error (${ALGORITHM}):`, error.message);
-        // 验证过程失败通常意味着配置或密钥有误，应抛出错误而不是返回 false
         throw new Error("RSA verification failed due to internal error. Check public key format and validity.");
     }
 }
 
+/* --- 测试代码 ---
+try {
+    const dataToSign = "这是一段需要使用数字签名的重要数据。";
+
+    // 1. 生成密钥对
+    console.log("--- 1. 生成 RSA 密钥对 ---");
+    const { publicKey, privateKey } = generateRSAKeyPair();
+    // console.log("私钥 (PEM):", privateKey);
+    // console.log("公钥 (PEM):", publicKey);
+
+    // 2. 使用私钥签名
+    console.log("\n--- 2. 进行签名 ---");
+    const signature = rsaSign({ text: dataToSign, privateKey: privateKey });
+    console.log("原始数据:", dataToSign);
+    console.log("签名结果 (Base64):", signature);
+
+    // 3. 使用公钥验证
+    console.log("\n--- 3. 验证签名 ---");
+    const isValid = rsaVerify({
+        text: dataToSign,
+        signature: signature,
+        publicKey: publicKey
+    });
+    console.log("验证结果 (正确签名):", isValid ? "✅ 验证通过" : "❌ 验证失败");
+
+    // 4. 验证失败场景 (数据篡改)
+    console.log("\n--- 4. 验证失败测试 (数据篡改) ---");
+    const tamperedData = "这是一段被篡改后的数据！";
+    const isInvalid = rsaVerify({
+        text: tamperedData, // 使用篡改后的数据
+        signature: signature,
+        publicKey: publicKey
+    });
+    console.log("验证结果 (篡改数据):", isInvalid ? "❌ 验证通过 (错误)" : "✅ 验证失败 (正确)");
+
+} catch (error) {
+    console.error("\n--- RSA 测试发生错误 ---");
+    console.error(error.message);
+}
+*/
+
 export default {
-    rsaSign,      // 优化后的函数名，更简洁
+    generateRSAKeyPair,
+    rsaSign,
     rsaVerify
 }
