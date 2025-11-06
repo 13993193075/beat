@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42d741df-1067-49c6-9b0f-02242e70a4df" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/WeChat-Pay/v3jsapi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/WeChat-Pay/v3jsapi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/WeChat-Pay/v3native.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/WeChat-Pay/v3native.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/WeChat/MPC.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/WeChat/MPC.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,40 +18,40 @@
     <session id="-2055113757">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="25" />
-          <entry key="project.open.time.0" value="23" />
+          <entry key="project.closed" value="26" />
+          <entry key="project.open.time.0" value="24" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="26" />
+          <entry key="project.opened" value="27" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="108" />
-          <entry key="json" value="18" />
+          <entry key="js" value="119" />
+          <entry key="json" value="19" />
           <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JSON" value="18" />
-          <entry key="JavaScript" value="108" />
+          <entry key="JSON" value="19" />
+          <entry key="JavaScript" value="119" />
           <entry key="PLAIN_TEXT" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="cjs" value="37" />
-          <entry key="js" value="3062" />
-          <entry key="json" value="21" />
+          <entry key="js" value="3100" />
+          <entry key="json" value="22" />
           <entry key="txt" value="158" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JSON" value="21" />
-          <entry key="JavaScript" value="3062" />
+          <entry key="JSON" value="22" />
+          <entry key="JavaScript" value="3100" />
           <entry key="PLAIN_TEXT" value="195" />
         </counts>
       </usages-collector>
@@ -61,11 +59,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="38">
               <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/libs/WeChat/MPC.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="513">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -98,6 +108,7 @@
       <find>crypto0</find>
       <find>package</find>
       <find>crypto</find>
+      <find>js_code</find>
     </findStrings>
     <replaceStrings>
       <replace>cellphone</replace>
@@ -133,7 +144,6 @@
         <option value="$PROJECT_DIR$/src/libs/WeChat/getGlobalAccessToken.js" />
         <option value="$PROJECT_DIR$/src/libs/WeChat/Token.js.txt" />
         <option value="$PROJECT_DIR$/src/libs/WeChat/Token.js" />
-        <option value="$PROJECT_DIR$/src/libs/WeChat/MPC.js" />
         <option value="$PROJECT_DIR$/src/libs/WeChat-Pay/v2.utils.js" />
         <option value="$PROJECT_DIR$/src/libs/WeChat-Pay/v2.micropay.js" />
         <option value="$PROJECT_DIR$/src/libs/WeChat-Pay/v3.txt" />
@@ -154,6 +164,7 @@
         <option value="$PROJECT_DIR$/src/libs/WeChat-Pay/v3close.js" />
         <option value="$PROJECT_DIR$/src/libs/WeChat-Pay/v3jsapi.js" />
         <option value="$PROJECT_DIR$/src/libs/WeChat-Pay/v3native.js" />
+        <option value="$PROJECT_DIR$/src/libs/WeChat/MPC.js" />
         <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
@@ -185,6 +196,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -208,13 +220,19 @@
               <item name="beat" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="libs" type="462c0819:PsiDirectoryNode" />
+              <item name="WeChat" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="beat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="beat" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
               <item name="WeChat-Pay" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -292,11 +310,12 @@
       <workItem from="1762400002385" duration="27992000" />
       <workItem from="1762454528011" duration="15000" />
       <workItem from="1762454915848" duration="160000" />
+      <workItem from="1762455823358" duration="1713000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105902000" />
+    <option name="totallyTimeSpent" value="107615000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="3" y="-1088" width="1936" height="1056" extended-state="6" />
@@ -395,24 +414,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/WeChat/MPC.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1742">
-          <caret line="67" column="48" selection-start-line="67" selection-start-column="40" selection-end-line="67" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/libs/Feie.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3078">
           <caret line="164" column="17" selection-start-line="164" selection-start-column="4" selection-end-line="164" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/WeChat/Token.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4997">
-          <caret line="263" column="15" lean-forward="true" selection-start-line="263" selection-start-column="15" selection-end-line="263" selection-end-column="15" />
         </state>
       </provider>
     </entry>
@@ -456,23 +461,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3jsapi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="762">
-          <caret line="70" column="11" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="11" />
-          <folding>
-            <element signature="e#40#89#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3native.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3sign.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -480,13 +468,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3native.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="836">
+          <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3out_trade_no.js">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3jsapi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-399">
+          <caret lean-forward="true" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#40#89#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/WeChat/Token.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="25" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/WeChat/MPC.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

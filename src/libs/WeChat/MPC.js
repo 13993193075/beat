@@ -1,4 +1,5 @@
-const axios = require('axios');
+import axios from 'axios'
+import Token from './Token.js'
 
 /**
  * @function getMiniProgramCode
@@ -15,7 +16,7 @@ async function getMiniProgramCode(para) {
 
     // 1. 获取全局接口调用凭证 access_token (这里假设 getGlobalAccessToken 已定义)
     // 注意：小程序和公众号共用这一个全局 access_token 接口
-    const tokenResult = await getGlobalAccessToken({ appid, secret });
+    const tokenResult = await Token.getGlobalAccessToken({ appid, secret });
 
     if (tokenResult.code !== 0) {
         return {
@@ -85,3 +86,5 @@ async function getMiniProgramCode(para) {
         };
     }
 }
+
+export {getMiniProgramCode}
