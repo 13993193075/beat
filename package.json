@@ -1,6 +1,6 @@
 {
   "name": "@yoooloo42/beat",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,7 +19,7 @@
     "@alicloud/ocr20191230": "^4.0.1",
     "@alicloud/openapi-client": "^0.4.15",
     "@alicloud/pop-core": "^1.8.0",
-    "@yoooloo42/bean": "^1.0.13",
+    "@yoooloo42/bean": "^1.0.14",
     "aliyun-api-gateway": "^1.1.6",
     "axios": "^1.13.2",
     "nodemailer": "^7.0.10",
