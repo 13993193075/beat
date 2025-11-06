@@ -5,7 +5,7 @@ import random from '@yoooloo42/bean/utils/random'
 import RSA from '../crypto/RSA.js'
 import v3sign from "./v3sign.js"
 
-function v3getPrepayId(para){
+function v3jsapi(para){
     // para.appid 微信开放平台或微信公众平台应用id（APPID）
     // para.mchid 商户号
     // para.serial_no 证书序列号
@@ -68,5 +68,5 @@ function v3getPrepayId(para){
 }
 
 export {
-    v3getPrepayId
+    v3jsapi
 }

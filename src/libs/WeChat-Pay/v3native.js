@@ -2,7 +2,7 @@
 // 获取code_url
 
 import v3sign from "./v3sign.js"
-function v3getCodeUrl(para){
+function v3native(para){
     // para.appid 微信开放平台或微信公众平台应用id（APPID）
     // para.mchid 商户号
     // para.serial_no 证书序列号
@@ -43,5 +43,5 @@ function v3getCodeUrl(para){
 }
 
 export {
-    v3getCodeUrl
+    v3native
 }
