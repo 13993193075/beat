@@ -19,7 +19,7 @@ function init({destination, fileSize, fileMimetype}){
     });
 
     // 2. 初始化 Multer
-    const upload = multer({
+    return multer({
         storage: storage,
         // 可选：文件大小限制 (例如：限制最大 1MB)
         limits: { fileSize },
@@ -34,12 +34,11 @@ function init({destination, fileSize, fileMimetype}){
                 cb(new Error('Invalid file type, only JPEG and PNG are allowed!'), false);
             }
         }
-    });
-    return upload
+    })
 }
 
-// 上传单个文件
-function uploadSingle(request, response, {
+// 获取上传的单个文件
+function holdSingle(request, response, {
     destination = 'uploads/',
     fileSize = 1024 * 1024 * 1, // 1兆
     fileMimetype = [
@@ -65,8 +64,8 @@ function uploadSingle(request, response, {
     })
 }
 
-// 上传多个文件
-function uploadArray(request, response, {
+// 获取上传的多个文件
+function holdArray(request, response, {
     destination = 'uploads/',
     fileSize = 1024 * 1024 * 1, // 1兆
     fileMimetype = [
@@ -94,6 +93,6 @@ function uploadArray(request, response, {
 }
 
 export default {
-    uploadSingle,
-    uploadArray
+    holdSingle,
+    holdArray
 }
