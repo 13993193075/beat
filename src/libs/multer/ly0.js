@@ -1,87 +1,62 @@
 import fs from 'fs'
 import path from 'path'
-import uploadPath from "../config/upload.js"
 const thisTime = new Date()
 
 // 图片新增
-// 多文件处理
-function imagesAppend (para) {
-    // para.dataunitId 数据单元 ID
-    // para.tblName 表名
-    // para.fieldName 字段名
-    // para.dataId 数据 ID
-    // para.arrSrc 上传路径
-
-    return new Promise(function (resolve, reject) {
-        if(!para.arrSrc || para.arrSrc.length === 0){
-            return resolve([])
-        }
-        let arrPromise = []
-        para.arrSrc.forEach((item, index)=>{
-            arrPromise.push(imageAppend ({
-                dataunitId: para.dataunitId,
-                tblName: para.tblName,
-                fieldName: para.fieldName,
-                fieldIndex: index,
-                dataId: para.dataId,
-                src: item
-            }))
-        })
-        Promise.all(arrPromise).then(result=>{
-            resolve(result)
-        })
-    })
-}
-
-// 图片新增
 function imageAppend (para) {
-    // para.dbFolderHead 数据库文件夹头部
-    // para.dbUrlHead 数据库URL头部
-    // para.uploadFolderHead 上传文件夹头部
-    // para.uploadUrlHead 上传URL头部
+    // para.pathHead 路径头部
+    // para.pathHead.dbFolder 数据库文件夹
+    // para.pathHead.dbUrl 数据库URL
+    // para.pathHead.uploadFolder 上传文件夹
+    // para.pathHead.uploadUrl 上传URL
     // para.uploaded 已上传文件的URL
-    // para.dataunitId 数据单元 ID
+
+    // para.dataunitId 数据单元ID
     // para.tblName 表名
     // para.fieldName 字段名
     // para.fieldIndex 数组类型字段的索引
-    // para.dataId 数据 ID
+    // para.dataId 数据ID
 
     return new Promise(function (resolve, reject) {
         if (!para.uploaded) {
             return resolve('')
         }
 
-        // 数据库文件夹：数据库文件夹头部 + 数据单元ID + 表名 + 字段名 + 数组类型字段的索引 + 当年 + 当月
-        const dbFolder = para.dbFolderHead +
+        // 数据库文件夹：数据单元ID + 表名 + 字段名 + 数组类型字段的索引 + 当年 + 当月
+        const dbFolder = para.pathHead.dbFolder +
             '/' + (para.dataunitId ? para.dataunitId : '') +
             '/' + para.tblName +
-            '/' + para.fieldName + '[' + (!!para.fieldIndex ? para.fieldIndex : "0") + "]" +
+            '/' + para.fieldName +
+            '[' + ('fieldIndex' in para ? para.fieldIndex : 0) + "]" +
             '/' + thisTime.getFullYear() +
             '/' + (thisTime.getMonth() + 1)
         // 数据库文件名：数据单元ID + 表名 + 字段名 + 数组类型字段的索引 + 数据ID + 随机数 + 扩展名
-        const dbFilename = (para.dataunitId ? para.dataunitId + '.' : '') +
+        const dbFileName = (para.dataunitId ? para.dataunitId + '.' : '') +
             para.tblName + '.' +
-            para.fieldName + '.' + (!!para.fieldIndex ? para.fieldIndex : "0") + '.' +
+            para.fieldName + '.' +
+            ('fieldIndex' in para ? para.fieldIndex : 0) + '.' +
             para.dataId + '.' +
             Math.floor((999999 - 0) * Math.random() + 0) +
             path.parse(para.uploaded).ext
-        // 上传文件夹中的文件路径：来自于 已上传文件的URL 头部置换
-        const filePath_uploadFolder = para.uploaded.replace(para.uploadUrlHead, para.uploadFolderHead)
-        // 数据库文件夹中的文件路径
-        const filePath_dbFolder = dbFolder + '/' + dbFilename
+
+        // 上传文件路径：来自于 已上传文件的URL 头部置换
+        const uploadFilePath = para.uploaded.replace(para.pathHead.uploadUrl, para.pathHead.uploadFolder)
+        // 数据库文件路径
+        const dbFilePath = dbFolder + '/' + dbFileName
         // 数据库URL：来自于 数据库文件夹中的文件路径 头部置换
-        const dbUrl = filePath_dbFolder.replace(para.dbFolderHead, para.dbUrlHead)
-        new Promise(function (resolve0, reject0) { // 创建数据库文件夹
+        const dbUrl = dbFilePath.replace(para.pathHead.dbFolder, para.pathHead.dbUrl)
+        new Promise(function (resolve0, reject0) {
+            // 创建数据库文件夹
             fs.mkdir(dbFolder, {recursive: true}, (err) => {
                 if (err) throw err
                 resolve0()
             })
-        }).then(function () { // 已上传文件转存
+        }).then(function () { //
             new Promise(function (resolve1, reject1) {
-                // 已上传文件移动至数据库文件夹
-                fs.rename(filePath_uploadFolder, filePath_dbFolder, (err) => {
+                // 已上传文件转存至数据库文件夹
+                fs.rename(uploadFilePath, dbFilePath, (err) => {
                     if (err) throw err
-                    resolve1(dbUrl) //返回 数据库URL中的文件路径
+                    resolve1(dbUrl) // 返回数据库URL
                 })
             }).then(function (result) {
                 resolve(result)
@@ -90,34 +65,181 @@ function imageAppend (para) {
     })
 }
 
-// 图片更新
-// 多文件处理
-function imagesUpdate (para) {
-    // para.dataunitId 数据单元 ID
-    // para.tblName 表名
-    // para.fieldName 字段名
-    // para.dataId 数据 ID
-    // para.arrSrcOld 原文件路径
-    // para.arrSrcDelete 删除文件路径
-    // para.arrSrcNew 上传路径
+// 图片删除
+function imageDelete (para) {
+    // para.pathHead 路径头部
+    // para.pathHead.dbFolder 数据库文件夹
+    // para.pathHead.dbUrl 数据库URL
+    // para.url 待删除文件的URL
 
     return new Promise(function (resolve, reject) {
-        let arrSrcOld = !!para.arrSrcOld && para.arrSrcOld.length > 0 ? para.arrSrcOld : [],
-            arrSrcDelete = !!para.arrSrcDelete && para.arrSrcDelete.length > 0 ? para.arrSrcDelete : [],
-            arrSrcNew = !!para.arrSrcNew && para.arrSrcNew.length > 0 ? para.arrSrcNew : []
+        if (!para.url) {
+            return resolve()
+        }
 
-        imagesDelete(arrSrcDelete).then(()=>{
-            imagesAppend ({
+        fs.unlink(para.url.replace(para.pathHead.dbUrl, para.pathHead.dbFolder), (err) => {
+            if (err) throw err
+            resolve()
+        })
+    })
+}
+
+// 图片更新
+function imageUpdate (para) {
+    // para.pathHead 路径头部
+    // para.pathHead.dbFolder 数据库文件夹
+    // para.pathHead.dbUrl 数据库URL
+    // para.pathHead.uploadFolder 上传文件夹
+    // para.pathHead.uploadUrl 上传URL
+    // para.uploaded 已上传文件的URL
+    // para.old 原文件的URL
+    // para.delete 是否删除原文件
+
+    // para.dataunitId 数据单元ID
+    // para.tblName 表名
+    // para.fieldName 字段名
+    // para.fieldIndex 数组类型字段的索引
+    // para.dataId 数据ID
+
+    return new Promise(function (resolve, reject) {
+        if (!!para.uploaded || para.delete === true || para.delete === 'true') {
+            imageDelete(para.old)
+        }
+        if (!para.uploaded) {
+            return resolve(para.old)
+        }
+        imageAppend({
+            pathHead: {
+                dbFolder: para.pathHead.dbFolder,
+                dbUrl: para.pathHead.dbUrl,
+                uploadFolder: para.pathHead.uploadFolder,
+                uploadUrl: para.pathHead.uploadUrl
+            },
+            uploaded: para.uploaded,
+
+            dataunitId: para.dataunitId,
+            tblName: para.tblName,
+            fieldName: para.fieldName,
+            fieldIndex: 'fieldIndex' in para ? para.fieldIndex : 0,
+            dataId: para.dataId
+        }).then(result=>{
+            resolve(result)
+        })
+    })
+}
+
+// 图片新增 - 多文件处理
+function imagesAppend (para) {
+    // para.pathHead 路径头部
+    // para.pathHead.dbFolder 数据库文件夹
+    // para.pathHead.dbUrl 数据库URL
+    // para.pathHead.uploadFolder 上传文件夹
+    // para.pathHead.uploadUrl 上传URL
+    // para.arrUploaded 已上传文件的URL
+
+    // para.dataunitId 数据单元ID
+    // para.tblName 表名
+    // para.fieldName 字段名
+    // para.dataId 数据ID
+
+    return new Promise(function (resolve, reject) {
+        if(!para.uploaded || para.uploaded.length === 0){
+            return resolve([])
+        }
+        let arrPromise = []
+        para.arrUploaded.forEach((item, index)=>{
+            arrPromise.push(imageAppend ({
+                pathHead: {
+                    dbFolder: para.pathHead.dbFolder,
+                    dbUrl: para.pathHead.dbUrl,
+                    uploadFolder: para.pathHead.uploadFolder,
+                    uploadUrl: para.pathHead.uploadUrl
+                },
+                uploaded: item,
+
                 dataunitId: para.dataunitId,
                 tblName: para.tblName,
                 fieldName: para.fieldName,
-                dataId: para.dataId,
-                arrSrc: arrSrcNew
+                fieldIndex: index,
+                dataId: para.dataId
+            }))
+        })
+        Promise.all(arrPromise).then(result=>{
+            resolve(result)
+        })
+    })
+}
+
+// 图片删除 - 多文件处理
+function imagesDelete(para){
+    // para.pathHead 路径头部
+    // para.pathHead.dbFolder 数据库文件夹
+    // para.pathHead.dbUrl 数据库URL
+    // para.arrUrl 待删除文件的URL
+
+    return new Promise(function (resolve, reject) {
+        if(!para.arrUrl || para.arrUrl.length === 0){
+            return resolve()
+        }
+
+        let arrPromise = []
+        para.arrUrl.forEach(i=>{
+            arrPromise.push(imageDelete({
+                pathHead: {
+                    dbFolder:  para.pathHead.dbFolder,
+                    dbUrl: para.pathHead.dbUrl
+                },
+                url: i
+            }))
+        })
+        Promise.all((arrPromise)).then(()=>{
+            resolve()
+        })
+    })
+}
+
+// 图片更新 - 多文件处理
+function imagesUpdate (para) {
+    // para.pathHead 路径头部
+    // para.pathHead.dbFolder 数据库文件夹
+    // para.pathHead.dbUrl 数据库URL
+    // para.pathHead.uploadFolder 上传文件夹
+    // para.pathHead.uploadUrl 上传URL
+    // para.arrUploaded 已上传文件的URL
+    // para.arrOld 原文件的URL
+    // para.arrDelete 待删除文件的URL
+
+    // para.dataunitId 数据单元ID
+    // para.tblName 表名
+    // para.fieldName 字段名
+    // para.dataId 数据ID
+
+    return new Promise(function (resolve, reject) {
+        imagesDelete({
+            pathHead: {
+                dbFolder: para.pathHead.dbFolder,
+                dbUrl: para.pathHead.dbUrl
+            },
+            arrUrl: para.arrDelete
+        }).then(()=>{
+            imagesAppend ({
+                pathHead: {
+                    dbFolder: para.pathHead.dbFolder,
+                    dbUrl: para.pathHead.dbUrl,
+                    uploadFolder: para.pathHead.uploadFolder,
+                    uploadUrl: para.pathHead.uploadUrl
+                },
+                arrUploaded: para.arrUploaded,
+
+                dataunitId: para.dataunitId,
+                tblName: para.tblName,
+                fieldName: para.fieldName,
+                dataId: para.dataId
             }).then(result=>{
                 let arrHoldon = []
-                arrSrcOld.forEach(i=>{
+                para.arrOld.forEach(i=>{
                     let holdon = true
-                    arrSrcDelete.forEach(j=>{
+                    para.arrDelete.forEach(j=>{
                         if(i === j){
                             holdon = false
                         }
@@ -131,86 +253,18 @@ function imagesUpdate (para) {
         })
     })
 }
-// 单文件处理
-function imageUpdate (para) {
-    // para.dataunitId 数据单元 ID
-    // para.tblName 表名
-    // para.fieldName 字段名
-    // para.dataId 数据 ID
-    // para.srcOld 原文件路径
-    // para.deleteOld 删除原文件
-    // para.srcNew 上传路径
-
-    return new Promise(function (resolve, reject) {
-        let srcOld = !!para.srcOld ? para.srcOld : "",
-            deleteOld = "deleteOld" in para && (para.deleteOld === true || para.deleteOld === "true"),
-            srcNew = !!para.srcNew ? para.srcNew : ""
-
-        let result = srcOld
-        if (!!srcNew || !!deleteOld) {
-            imageDelete(srcOld)
-            result = ""
-        }
-        if (!srcNew) {
-            return resolve(result)
-        }
-        imageAppend({
-            dataunitId: para.dataunitId ? para.dataunitId : "",
-            tblName: para.tblName,
-            fieldName: para.fieldName,
-            dataId: para.dataId,
-            src: srcNew
-        }).then(result=>{
-            resolve(result)
-        })
-    })
-}
-
-// 图片删除
-// 多文件处理
-function imagesDelete(arrSrc){
-    return new Promise(function (resolve, reject) {
-        if(!arrSrc || arrSrc.length === 0){
-            return resolve()
-        }
-
-        let arrPromise = []
-        arrSrc.forEach(i=>{
-            arrPromise.push(imageDelete(i))
-        })
-        Promise.all((arrPromise)).then(()=>{
-            resolve()
-        })
-    })
-}
-// 单文件处理
-function imageDelete (src) {
-    return new Promise(function (resolve, reject) {
-        if (!src) {
-            return resolve()
-        }
-
-        let p = src.replace(uploadPath.imageUrlPath, uploadPath.imageFilePath)
-        fs.unlink(p, (err) => {
-            if (err) console.log(err)
-            resolve()
-        })
-    })
-}
 
 // 内部模块：获取富文本中资源文件(图片等)的src
 function richtextGetSrc (richtext) {
-    let srcArr = []
+    let arrSrc = []
     if (richtext) {
-        srcArr = richtext.match(/src=[\"\'][^\"\']{0,}[\"\']/g)
-
-        for (let i in srcArr) {
-            let a = srcArr [i]
-            srcArr [i] = a.slice(5, a.length - 1)
+        arrSrc = richtext.match(/src=[\"\'][^\"\']{0,}[\"\']/g)
+        for (let i in arrSrc) {
+            let a = arrSrc [i]
+            arrSrc [i] = a.slice(5, a.length - 1)
         }
     }
-
-    return srcArr
+    return arrSrc
 }
 
 // 富文本新增
