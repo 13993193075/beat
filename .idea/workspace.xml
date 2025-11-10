@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42d741df-1067-49c6-9b0f-02242e70a4df" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/libs/multer/clear.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/readfile/Utf8.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/multer/ly0.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/multer/ly0.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/Base64.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/readfile/Base64.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/Base64.js.test.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/readfile/Base64.js.test.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/multer/convert.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/multer/convert.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,42 +23,44 @@
     <session id="-2055113757">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="32" />
+          <entry key="project.closed" value="34" />
           <entry key="project.open.time.0" value="27" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="3" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="34" />
+          <entry key="project.opened" value="35" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="136" />
-          <entry key="json" value="19" />
+          <entry key="js" value="159" />
+          <entry key="json" value="24" />
+          <entry key="png" value="1" />
           <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JSON" value="19" />
-          <entry key="JavaScript" value="136" />
+          <entry key="Image" value="1" />
+          <entry key="JSON" value="24" />
+          <entry key="JavaScript" value="159" />
           <entry key="PLAIN_TEXT" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="cjs" value="37" />
-          <entry key="js" value="5613" />
-          <entry key="json" value="22" />
+          <entry key="js" value="5879" />
+          <entry key="json" value="70" />
           <entry key="txt" value="158" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JSON" value="22" />
-          <entry key="JavaScript" value="5613" />
+          <entry key="JSON" value="70" />
+          <entry key="JavaScript" value="5879" />
           <entry key="PLAIN_TEXT" value="195" />
         </counts>
       </usages-collector>
@@ -62,13 +69,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/libs/multer/ly0.js">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-11251">
-              <caret line="54" column="49" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="76">
+              <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -110,6 +114,7 @@
       <find>srcArr</find>
       <find>richtextUpdate</find>
       <find>reject2</find>
+      <find>Base64.js</find>
     </findStrings>
     <replaceStrings>
       <replace>cellphone</replace>
@@ -124,6 +129,9 @@
       <replace>arrSrc</replace>
       <replace>richtextReturn</replace>
     </replaceStrings>
+    <dirStrings>
+      <dir>C:\ly\beat\src\libs</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -131,8 +139,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/libs/Crypto.js" />
-        <option value="$PROJECT_DIR$/src/libs/crypto/Crypto.js" />
         <option value="$PROJECT_DIR$/src/libs/crypto/Hash.js" />
         <option value="$PROJECT_DIR$/src/libs/Email.js" />
         <option value="$PROJECT_DIR$/src/libs/ali-sms.js" />
@@ -173,12 +179,17 @@
         <option value="$PROJECT_DIR$/src/libs/WeChat-Pay/v3jsapi.js" />
         <option value="$PROJECT_DIR$/src/libs/WeChat-Pay/v3native.js" />
         <option value="$PROJECT_DIR$/src/libs/WeChat/MPC.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/libs/upload/multer.js" />
-        <option value="$PROJECT_DIR$/src/libs/multer/convert.js" />
         <option value="$PROJECT_DIR$/src/libs/multer/transfer.js" />
         <option value="$PROJECT_DIR$/src/libs/multer/multer.js" />
+        <option value="$PROJECT_DIR$/src/libs/multer/clear.js" />
+        <option value="$PROJECT_DIR$/src/libs/multer/readfile.js" />
+        <option value="$PROJECT_DIR$/src/libs/multer/convert.js" />
         <option value="$PROJECT_DIR$/src/libs/multer/ly0.js" />
+        <option value="$PROJECT_DIR$/src/libs/readfile/utf8.js" />
+        <option value="$PROJECT_DIR$/src/libs/readfile/Utf8.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/libs/readfile/Json.js" />
       </list>
     </option>
   </component>
@@ -209,6 +220,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -232,13 +244,12 @@
               <item name="beat" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="libs" type="462c0819:PsiDirectoryNode" />
-              <item name="multer" type="462c0819:PsiDirectoryNode" />
+              <item name="readfile" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -249,6 +260,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\ly\beat\src\libs\readfile" />
       <recent name="C:\ly\beat\src\libs\Ali" />
       <recent name="C:\ly\beat\src\libs\crypto" />
     </key>
@@ -324,15 +336,17 @@
       <workItem from="1762574056402" duration="31668000" />
       <workItem from="1762622148951" duration="71000" />
       <workItem from="1762671096462" duration="16311000" />
-      <workItem from="1762743622500" duration="9445000" />
+      <workItem from="1762743622500" duration="19333000" />
+      <workItem from="1762813602601" duration="3862000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="185149000" />
+    <option name="totallyTimeSpent" value="198899000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="3" y="-1088" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -406,13 +420,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/libs/fs.js" />
-    <entry file="file://$PROJECT_DIR$/src/libs/Base64.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/libs/Yizoo.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3154">
@@ -488,20 +495,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3out_trade_no.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3jsapi.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-399">
           <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -521,25 +518,76 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/libs/multer/multer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="155" column="42" selection-start-line="155" selection-start-column="31" selection-end-line="155" selection-end-column="42" />
+        <state relative-caret-position="-858">
+          <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/multer/readfile.js" />
+    <entry file="file://$PROJECT_DIR$/src/libs/readfile/Base64.js.test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/multer/ly0.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/libs/multer/convert.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="19">
+          <caret line="11" column="41" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/multer/ly0.js">
+    <entry file="file://$PROJECT_DIR$/src/libs/multer/clear.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11251">
-          <caret line="54" column="49" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
+        <state relative-caret-position="608">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#0#34#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3out_trade_no.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/readfile/Base64.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="20" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/readfile/Utf8.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="20" selection-start-column="20" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/readfile/Json.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="2" column="30" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
         </state>
       </provider>
     </entry>

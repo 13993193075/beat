@@ -1,7 +1,8 @@
 {
   "name": "@yoooloo42/beat",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,7 +30,11 @@
   "exports": {
     "./libs/*": "./src/libs/*.js",
     "./libs/Ali/*": "./src/libs/Ali/*.js",
-    "./libs/crypto/*": "./src/libs/crypto/*.js"
+    "./libs/crypto/*": "./src/libs/crypto/*.js",
+    "./libs/multer/*": "./src/libs/multer/*.js",
+    "./libs/readfile/*": "./src/libs/readfile/*.js",
+    "./libs/WeChat/*": "./src/libs/WeChat/*.js",
+    "./libs/WeChat-Pay/*": "./src/libs/WeChat-Pay/*.js"
   },
   "files": [
     "src"

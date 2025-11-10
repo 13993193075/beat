@@ -9,7 +9,7 @@ import path from 'path'
  * 例如: "https://api.example.com/files"
  * @returns 转换后的Web URL字符串。
  */
-function pathToUrl({filePath, fileRootPath, baseUrl}) {
+function pathToUrl(filePath, fileRootPath, baseUrl) {
     // 1. 统一路径分隔符 (解决 Windows/Linux 路径分隔符差异)
     //    将所有 \ 替换为 /
     const normalizedPath = filePath.replace(/\\/g, '/');
@@ -48,7 +48,7 @@ function pathToUrl({filePath, fileRootPath, baseUrl}) {
  * @param baseUrl - Web访问的基础URL。
  * @returns string
  */
-function urlToPath({webUrl, fileRootPath, baseUrl}) {
+function urlToPath(webUrl, baseUrl, fileRootPath) {
     // 1. 确保 baseUrl 以 / 结尾 (方便统一处理)
     const normalizedBaseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
 
