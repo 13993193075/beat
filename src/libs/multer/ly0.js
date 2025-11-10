@@ -24,7 +24,7 @@ function imageAppend (para) {
 
         // 数据库文件夹：数据单元ID + 表名 + 字段名 + 数组类型字段的索引 + 当年 + 当月
         const dbFolder = para.pathHead.dbFolder +
-            '/' + (para.dataunitId ? para.dataunitId : '') +
+            (para.dataunitId ? '/' + para.dataunitId : '') +
             '/' + para.tblName +
             '/' + para.fieldName +
             '[' + ('fieldIndex' in para ? para.fieldIndex : 0) + "]" +
@@ -45,18 +45,18 @@ function imageAppend (para) {
         const dbFilePath = dbFolder + '/' + dbFileName
         // 数据库URL：来自于 数据库文件夹中的文件路径 头部置换
         const dbUrl = dbFilePath.replace(para.pathHead.dbFolder, para.pathHead.dbUrl)
-        new Promise(function (resolve0, reject0) {
+        new Promise(function (resolve, reject) {
             // 创建数据库文件夹
             fs.mkdir(dbFolder, {recursive: true}, (err) => {
                 if (err) throw err
-                resolve0()
+                resolve()
             })
         }).then(function () { //
-            new Promise(function (resolve1, reject1) {
+            new Promise(function (resolve, reject) {
                 // 已上传文件转存至数据库文件夹
                 fs.rename(uploadFilePath, dbFilePath, (err) => {
                     if (err) throw err
-                    resolve1(dbUrl) // 返回数据库URL
+                    resolve(dbUrl) // 返回数据库URL
                 })
             }).then(function (result) {
                 resolve(result)
@@ -269,194 +269,198 @@ function richtextGetSrc (richtext) {
 
 // 富文本新增
 function richtextAppend (para) {
-    // para.dataunitId 数据单元 ID
-    // para.tblName 表名
-    // para.fieldName 字段名
-    // para.dataId 数据 ID
+    // para.pathHead 路径头部
+    // para.pathHead.dbFolder 数据库文件夹
+    // para.pathHead.dbUrl 数据库URL
+    // para.pathHead.uploadFolder 上传文件夹
+    // para.pathHead.uploadUrl 上传URL
     // para.richtext 富文本
 
+    // para.dataunitId 数据单元ID
+    // para.tblName 表名
+    // para.fieldName 字段名
+    // para.dataId 数据ID
 
     return new Promise(function (resolve, reject) {
-        let vRichtextUpdate = para.richtext,
-            srcArr = richtextGetSrc(para.richtext);
+        let richtextReturn = para.richtext,
+            arrSrc = richtextGetSrc(para.richtext);
 
-        // 数据文件存储路径：pathStorageDataFolder，pathStorageDataFile
-        // 数据文件路由：pathSrcData
-        // 上传文件存储路径：pathStorageUploadFolder，pathStorageUploadFile
+        let dbFolder = para.pathHead.dbFolder +
+            (para.dataunitId ? '/' + para.dataunitId : '') +
+            '/' + para.tblName +
+            '/' + para.fieldName +
+            '/' + thisTime.getFullYear() +
+            '/' + (thisTime.getMonth() + 1);
 
-        let pathStorageDataFolder = uploadPath.imageFilePath + '/' +
-            (para.dataunitId ? para.dataunitId + '/' : '') +
-            para.tblName + '/' +
-            para.fieldName + '/' +
-            thisTime.getFullYear() + '/' +
-            (thisTime.getMonth() + 1);
-
-        new Promise(function (resolve, reject) { //设置(新建)数据文件存储路径
-            fs.mkdir(pathStorageDataFolder, {recursive: true}, (err) => {
-                if (err) console.log(err)
-
+        new Promise(function (resolve, reject) {
+            // 创建数据库文件夹
+            fs.mkdir(dbFolder, {recursive: true}, (err) => {
+                if (err) throw err
                 resolve()
             })
         }).then(function () { //上传文件转存，富文本处理
-            let arrPrm = []
+            let arrPromise = []
 
-            for (let i in srcArr) {
-                let
-                    pathStorageUploadFile = srcArr [i].replace(uploadPath.uploadUrlPath, uploadPath.uploadFilePath),
-                    pathStorageDataFile = pathStorageDataFolder + '/' +
+            for (let i in arrSrc) {
+                let uploadFilePath = arrSrc[i].replace(para.pathHead.uploadUrl, para.pathHead.uploadFolder),
+                    dbFilePath = dbFolder + '/' +
                         (para.dataunitId ? para.dataunitId + '.' : '') +
                         para.tblName + '.' +
                         para.fieldName + '.' +
                         para.dataId + '.' +
                         Math.floor((999999 - 0) * Math.random() + 0) +
-                        path.parse(srcArr [i]).ext,
-                    pathSrcData = pathStorageDataFile.replace(uploadPath.imageFilePath, uploadPath.imageUrlPath)
+                        path.parse(arrSrc [i]).ext,
+                    dbUrl = dbFilePath.replace(para.pathHead.dbFolder, para.pathHead.dbUrl)
 
-                arrPrm [i] = new Promise(function (resolve, reject) {
-                    fs.rename(pathStorageUploadFile, pathStorageDataFile, (err) => { //上传文件移动至数据文件存储路径
-                        if (err) console.log(err) //阻止抛出异常
+                arrPromise[i] = new Promise(function (resolve, reject) {
+                    // 已上传文件转存至数据库文件夹
+                    fs.rename(uploadFilePath, dbFilePath, (err) => {
+                        if (err) throw err
 
-                        vRichtextUpdate = vRichtextUpdate.replace(srcArr [i], pathSrcData)
-                        //重置富文本内相应的路由
+                        // 重置富文本内的src
+                        richtextReturn = richtextReturn.replace(arrSrc[i], dbUrl)
 
                         resolve()
                     })
                 })
             }
 
-            Promise.all(arrPrm).then(function () {
-                resolve(vRichtextUpdate)
-            })
-        })
-    })
-}
-
-// 富文本更新
-function richtextUpdate (para) {
-    // para.dataunitId 数据单元 ID
-    // para.tblName 表名
-    // para.fieldName 字段名
-    // para.dataId 数据 ID
-    // para.richtextNew 新富文本
-    // para.richtextOld 原富文本
-
-    return new Promise(function (resolve, reject) {
-        let vRichtextUpdate = para.richtextNew,
-            srcArrNew = richtextGetSrc(para.richtextNew),
-            srcArrOld = richtextGetSrc(para.richtextOld)
-
-        // 数据文件存储路径：pathStorageDataFolder，pathStorageDataFile
-        // 数据文件路由：pathSrcData
-        // 上传文件存储路径：pathStorageUploadFolder，pathStorageUploadFile
-
-        let pathStorageDataFolder = uploadPath.imageFilePath + '/' +
-            (para.dataunitId ? para.dataunitId + '/' : '') +
-            para.tblName + '/' +
-            para.fieldName + '/' +
-            thisTime.getFullYear() + '/' +
-            (thisTime.getMonth() + 1)
-
-        new Promise(function (resolve, reject) { //设置(新建)数据文件存储路径
-            fs.mkdir(pathStorageDataFolder, {recursive: true}, (err) => {
-                if (err) console.log(err)
-                resolve()
-            })
-        }).then(function () { //上传文件转存，富文本处理
-            return new Promise(function (resolve, reject) {
-                let arrPrm = []
-
-                for (let i in srcArrNew) {
-                    if (srcArrNew [i].startsWith('/ly0/db-mongo/upload')) { //处理富文本 richtextNew 内的新增路由
-                        let
-                            pathStorageUploadFile = srcArrNew [i].replace(uploadPath.uploadUrlPath, uploadPath.uploadFilePath),
-                            pathStorageDataFile = pathStorageDataFolder + '/' +
-                                (para.dataunitId ? para.dataunitId + '.' : '') +
-                                para.tblName + '.' +
-                                para.fieldName + '.' +
-                                para.dataId + '.' +
-                                Math.floor((999999 - 0) * Math.random() + 0) +
-                                path.parse(srcArrNew [i]).ext,
-                            pathSrcData = pathStorageDataFile.replace(uploadPath.imageFilePath, uploadPath.imageUrlPath)
-
-                        arrPrm [i] = new Promise(function (resolve, reject) {
-                            fs.rename(pathStorageUploadFile, pathStorageDataFile, (err) => { //上传文件转存至数据文件存储路径
-                                if (err) console.log(err)
-
-                                vRichtextUpdate = vRichtextUpdate.replace(srcArrNew [i], pathSrcData)
-                                //重置富文本内相应的路由
-
-                                resolve()
-                            })
-                        })
-                    } else { //处理富文本 richtextNew 内的原路由，原文件保留
-                        for (let j in srcArrOld) {
-                            if (srcArrOld [j] === srcArrNew [i]) {
-                                srcArrOld [j] = ''
-                            }
-                        }
-                    }
-                }
-
-                Promise.all(arrPrm).then(function () {
-                    resolve()
-                })
-            })
-        }).then(function () { //删除垃圾文件
-            let arrPrm = []
-
-            for (let i in srcArrOld) {
-                if (srcArrOld [i]) {
-                    arrPrm [i] = new Promise(function (resolve, reject) {
-                        let p = srcArrOld [i].replace(uploadPath.imageUrlPath, uploadPath.imageFilePath)
-                        fs.unlink(p, (err) => {
-                            if (err) console.log(err)
-
-                            resolve()
-                        })
-                    })
-                }
-            }
-
-            Promise.all(arrPrm).then(function () {
-                resolve(vRichtextUpdate)
+            Promise.all(arrPromise).then(function () {
+                resolve(richtextReturn)
             })
         })
     })
 }
 
 // 富文本删除
-function richtextDelete (richtext) {
-    return new Promise(function (resolve, reject) {
-        let srcArr = richtextGetSrc(richtext),
-            arrPrm = []
+function richtextDelete (para) {
+    // para.pathHead 路径头部
+    // para.pathHead.dbFolder 数据库文件夹
+    // para.pathHead.dbUrl 数据库URL
+    // para.richtext 富文本
 
-        for (let i in srcArr) {
-            arrPrm [i] = new Promise(function (resolve, reject) {
-                let p = srcArr [i].replace(uploadPath.imageUrlPath, uploadPath.imageFilePath)
-                fs.unlink(p, (err) => {
-                    if (err) console.log(err)
+    return new Promise(function (resolve, reject) {
+        let arrSrc = richtextGetSrc(para.richtext),
+            arrPromise = []
+
+        for (let i in arrSrc) {
+            arrPromise[i] = new Promise(function (resolve, reject) {
+                fs.unlink(arrSrc [i].replace(para.pathHead.dbUrl, para.pathHead.dbFolder), err => {
+                    if (err) throw err
                     resolve()
                 })
             })
         }
 
-        Promise.all(arrPrm).then(function () {
-            resolve({
-                code: 0,
-                message: '删除成功'
+        Promise.all(arrPromise).then(function () {
+            resolve({code: 0, message: '删除成功'})
+        })
+    })
+}
+
+// 富文本更新
+function richtextReturn (para) {
+    // para.pathHead 路径头部
+    // para.pathHead.dbFolder 数据库文件夹
+    // para.pathHead.dbUrl 数据库URL
+    // para.pathHead.uploadFolder 上传文件夹
+    // para.pathHead.uploadUrl 上传URL
+    // para.richtextNew 新富文本
+    // para.richtextOld 原富文本
+    
+    // para.dataunitId 数据单元ID
+    // para.tblName 表名
+    // para.fieldName 字段名
+    // para.dataId 数据ID
+
+    return new Promise(function (resolve, reject) {
+        let richtextReturn = para.richtextNew,
+            arrSrcNew = richtextGetSrc(para.richtextNew),
+            arrSrcOld = richtextGetSrc(para.richtextOld)
+
+        let dbFolder = para.pathHead.dbFolder + 
+            (para.dataunitId ? '/' + para.dataunitId : '') +
+            '/' + para.tblName + 
+            '/' + para.fieldName + 
+            '/' + thisTime.getFullYear() + 
+            '/' + (thisTime.getMonth() + 1)
+
+        new Promise(function (resolve, reject) {
+            // 创建数据库文件夹
+            fs.mkdir(dbFolder, {recursive: true}, (err) => {
+                if (err) console.log(err)
+                resolve()
+            })
+        }).then(function () {
+            new Promise(function (resolve, reject) {
+                let arrPromise = []
+                for (let i in arrSrcNew) {
+                    // 处理富文本 richtextNew 内的新增src
+                    if (arrSrcNew [i].startsWith(para.pathHead.uploadUrl)) {
+                        let uploadFilePath = arrSrcNew [i].replace(para.pathHead.uploadUrl, para.pathHead.uploadFolder),
+                            dbFilePath = dbFolder + '/' +
+                                (para.dataunitId ? para.dataunitId + '.' : '') +
+                                para.tblName + '.' +
+                                para.fieldName + '.' +
+                                para.dataId + '.' +
+                                Math.floor((999999 - 0) * Math.random() + 0) +
+                                path.parse(arrSrcNew [i]).ext,
+                            dbUrl = dbFilePath.replace(para.pathHead.dbFolder, para.pathHead.dbUrl)
+    
+                        arrPromise.push(new Promise(function (resolve, reject) {
+                            // 已上传文件转存至数据库文件夹
+                            fs.rename(uploadFilePath, dbFilePath, (err) => {
+                                if (err) throw err
+    
+                                // 重置富文本内新增的src
+                                richtextReturn = richtextReturn.replace(arrSrcNew [i], dbUrl)
+    
+                                resolve()
+                            })
+                        }))
+                    } else {
+                        // 处理富文本 richtextNew 内的原src，原文件保留
+                        for (let j in arrSrcOld) {
+                            if (arrSrcOld [j] === arrSrcNew [i]) {
+                                arrSrcOld [j] = ''
+                            }
+                        }
+                    }
+                }
+    
+                Promise.all(arrPromise).then(function () {
+                    resolve()
+                })
+            }).then(function () {
+                let arrPromise = []
+                for (let i in arrSrcOld) {
+                    if (arrSrcOld [i]) {
+                        arrPromise.push(new Promise(function (resolve, reject) {
+                            // 删除垃圾文件
+                            fs.unlink(arrSrcOld [i].replace(para.pathHead.dbUrl, para.pathHead.dbFolder), err => {
+                                if (err) throw err
+                                resolve()
+                            })
+                        }))
+                    }
+                }
+    
+                Promise.all(arrPromise).then(function () {
+                    resolve(richtextReturn)
+                })
             })
         })
     })
 }
 
 export default {
-    imagesAppend,
     imageAppend,
-    imagesUpdate,
-    imageUpdate,
-    imagesDelete,
     imageDelete,
+    imageUpdate,
+    imagesAppend,
+    imagesDelete,
+    imagesUpdate,
     richtextAppend,
-    richtextUpdate,
-    richtextDelete
+    richtextDelete,
+    richtextReturn
 }
