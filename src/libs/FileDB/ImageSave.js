@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import Richtext from './richtext.js'
 const thisTime = new Date()
 
 // 图片新增
@@ -14,7 +15,7 @@ function imageAppend (para) {
     // para.dataunitId 数据单元ID
     // para.tblName 表名
     // para.fieldName 字段名
-    // para.fieldIndex 数组类型字段的索引
+    // para.fieldIndex 多文件索引
     // para.dataId 数据ID
 
     return new Promise(function (resolve, reject) {
@@ -22,7 +23,7 @@ function imageAppend (para) {
             return resolve('')
         }
 
-        // 数据库文件夹：数据单元ID + 表名 + 字段名 + 数组类型字段的索引 + 当年 + 当月
+        // 数据库文件夹：数据单元ID + 表名 + 字段名 + 多文件索引 + 当年 + 当月
         const dbFolder = para.pathHead.dbFolder +
             (para.dataunitId ? '/' + para.dataunitId : '') +
             '/' + para.tblName +
@@ -30,7 +31,7 @@ function imageAppend (para) {
             '[' + ('fieldIndex' in para ? para.fieldIndex : 0) + "]" +
             '/' + thisTime.getFullYear() +
             '/' + (thisTime.getMonth() + 1)
-        // 数据库文件名：数据单元ID + 表名 + 字段名 + 数组类型字段的索引 + 数据ID + 随机数 + 扩展名
+        // 数据库文件名：数据单元ID + 表名 + 字段名 + 多文件索引 + 数据ID + 随机数 + 扩展名
         const dbFileName = (para.dataunitId ? para.dataunitId + '.' : '') +
             para.tblName + '.' +
             para.fieldName + '.' +
@@ -39,22 +40,22 @@ function imageAppend (para) {
             Math.floor((999999 - 0) * Math.random() + 0) +
             path.parse(para.uploaded).ext
 
-        // 上传文件路径：来自于 已上传文件的URL 头部置换
+        // 上传文件路径
         const uploadFilePath = para.uploaded.replace(para.pathHead.uploadUrl, para.pathHead.uploadFolder)
         // 数据库文件路径
         const dbFilePath = dbFolder + '/' + dbFileName
-        // 数据库URL：来自于 数据库文件夹中的文件路径 头部置换
+        // 数据库URL
         const dbUrl = dbFilePath.replace(para.pathHead.dbFolder, para.pathHead.dbUrl)
         new Promise(function (resolve, reject) {
             // 创建数据库文件夹
-            fs.mkdir(dbFolder, {recursive: true}, (err) => {
+            fs.mkdir(dbFolder, {recursive: true}, err => {
                 if (err) throw err
                 resolve()
             })
-        }).then(function () { //
+        }).then(function () {
             new Promise(function (resolve, reject) {
                 // 已上传文件转存至数据库文件夹
-                fs.rename(uploadFilePath, dbFilePath, (err) => {
+                fs.rename(uploadFilePath, dbFilePath, err => {
                     if (err) throw err
                     resolve(dbUrl) // 返回数据库URL
                 })
@@ -76,8 +77,7 @@ function imageDelete (para) {
         if (!para.url) {
             return resolve()
         }
-
-        fs.unlink(para.url.replace(para.pathHead.dbUrl, para.pathHead.dbFolder), (err) => {
+        fs.unlink(para.url.replace(para.pathHead.dbUrl, para.pathHead.dbFolder), err => {
             if (err) throw err
             resolve()
         })
@@ -93,21 +93,28 @@ function imageUpdate (para) {
     // para.pathHead.uploadUrl 上传URL
     // para.uploaded 已上传文件的URL
     // para.old 原文件的URL
-    // para.delete 是否删除原文件
+    // para.delete 如果没有上传新文件，是否删除原文件
 
     // para.dataunitId 数据单元ID
     // para.tblName 表名
     // para.fieldName 字段名
-    // para.fieldIndex 数组类型字段的索引
+    // para.fieldIndex 多文件索引
     // para.dataId 数据ID
 
     return new Promise(function (resolve, reject) {
         if (!!para.uploaded || para.delete === true || para.delete === 'true') {
-            imageDelete(para.old)
+            imageDelete({
+                pathHead: {
+                    dbFolder: para.pathHead.dbFolder,
+                    dbUrl: para.pathHead.dbUrl
+                },
+                url: para.old
+            })
         }
         if (!para.uploaded) {
             return resolve(para.old)
         }
+
         imageAppend({
             pathHead: {
                 dbFolder: para.pathHead.dbFolder,
@@ -143,18 +150,13 @@ function imagesAppend (para) {
     // para.dataId 数据ID
 
     return new Promise(function (resolve, reject) {
-        if(!para.uploaded || para.uploaded.length === 0){
+        if(!para.arrUploaded || para.arrUploaded.length === 0){
             return resolve([])
         }
-        let arrPromise = []
+        let arrPrm = []
         para.arrUploaded.forEach((item, index)=>{
-            arrPromise.push(imageAppend ({
-                pathHead: {
-                    dbFolder: para.pathHead.dbFolder,
-                    dbUrl: para.pathHead.dbUrl,
-                    uploadFolder: para.pathHead.uploadFolder,
-                    uploadUrl: para.pathHead.uploadUrl
-                },
+            arrPrm.push(imageAppend ({
+                pathHead: para.pathHead,
                 uploaded: item,
 
                 dataunitId: para.dataunitId,
@@ -164,7 +166,7 @@ function imagesAppend (para) {
                 dataId: para.dataId
             }))
         })
-        Promise.all(arrPromise).then(result=>{
+        Promise.all(arrPrm).then(result=>{
             resolve(result)
         })
     })
@@ -182,17 +184,14 @@ function imagesDelete(para){
             return resolve()
         }
 
-        let arrPromise = []
+        let arrPrm = []
         para.arrUrl.forEach(i=>{
-            arrPromise.push(imageDelete({
-                pathHead: {
-                    dbFolder:  para.pathHead.dbFolder,
-                    dbUrl: para.pathHead.dbUrl
-                },
+            arrPrm.push(imageDelete({
+                pathHead: para.pathHead,
                 url: i
             }))
         })
-        Promise.all((arrPromise)).then(()=>{
+        Promise.all((arrPrm)).then(()=>{
             resolve()
         })
     })
@@ -223,12 +222,7 @@ function imagesUpdate (para) {
             arrUrl: para.arrDelete
         }).then(()=>{
             imagesAppend ({
-                pathHead: {
-                    dbFolder: para.pathHead.dbFolder,
-                    dbUrl: para.pathHead.dbUrl,
-                    uploadFolder: para.pathHead.uploadFolder,
-                    uploadUrl: para.pathHead.uploadUrl
-                },
+                pathHead: para.pathHead,
                 arrUploaded: para.arrUploaded,
 
                 dataunitId: para.dataunitId,
@@ -236,6 +230,7 @@ function imagesUpdate (para) {
                 fieldName: para.fieldName,
                 dataId: para.dataId
             }).then(result=>{
+                // 原文件中未删除的并入返回结果
                 let arrHoldon = []
                 para.arrOld.forEach(i=>{
                     let holdon = true
@@ -244,7 +239,7 @@ function imagesUpdate (para) {
                             holdon = false
                         }
                     })
-                    if(!!holdon){
+                    if(holdon){
                         arrHoldon.push(i)
                     }
                 })
@@ -252,19 +247,6 @@ function imagesUpdate (para) {
             })
         })
     })
-}
-
-// 内部模块：获取富文本中资源文件(图片等)的src
-function richtextGetSrc (richtext) {
-    let arrSrc = []
-    if (richtext) {
-        arrSrc = richtext.match(/src=[\"\'][^\"\']{0,}[\"\']/g)
-        for (let i in arrSrc) {
-            let a = arrSrc [i]
-            arrSrc [i] = a.slice(5, a.length - 1)
-        }
-    }
-    return arrSrc
 }
 
 // 富文本新增
@@ -283,7 +265,7 @@ function richtextAppend (para) {
 
     return new Promise(function (resolve, reject) {
         let richtextReturn = para.richtext,
-            arrSrc = richtextGetSrc(para.richtext);
+            arrSrc = Richtext.extractAllSrc(para.richtext);
 
         let dbFolder = para.pathHead.dbFolder +
             (para.dataunitId ? '/' + para.dataunitId : '') +
@@ -294,13 +276,12 @@ function richtextAppend (para) {
 
         new Promise(function (resolve, reject) {
             // 创建数据库文件夹
-            fs.mkdir(dbFolder, {recursive: true}, (err) => {
+            fs.mkdir(dbFolder, {recursive: true}, err => {
                 if (err) throw err
                 resolve()
             })
-        }).then(function () { //上传文件转存，富文本处理
-            let arrPromise = []
-
+        }).then(function () {
+            let arrPrm = []
             for (let i in arrSrc) {
                 let uploadFilePath = arrSrc[i].replace(para.pathHead.uploadUrl, para.pathHead.uploadFolder),
                     dbFilePath = dbFolder + '/' +
@@ -312,20 +293,19 @@ function richtextAppend (para) {
                         path.parse(arrSrc [i]).ext,
                     dbUrl = dbFilePath.replace(para.pathHead.dbFolder, para.pathHead.dbUrl)
 
-                arrPromise[i] = new Promise(function (resolve, reject) {
+                arrPrm.push(new Promise(function (resolve, reject) {
                     // 已上传文件转存至数据库文件夹
-                    fs.rename(uploadFilePath, dbFilePath, (err) => {
+                    fs.rename(uploadFilePath, dbFilePath, err => {
                         if (err) throw err
 
                         // 重置富文本内的src
                         richtextReturn = richtextReturn.replace(arrSrc[i], dbUrl)
-
                         resolve()
                     })
-                })
+                }))
             }
 
-            Promise.all(arrPromise).then(function () {
+            Promise.all(arrPrm).then(function () {
                 resolve(richtextReturn)
             })
         })
@@ -340,26 +320,25 @@ function richtextDelete (para) {
     // para.richtext 富文本
 
     return new Promise(function (resolve, reject) {
-        let arrSrc = richtextGetSrc(para.richtext),
-            arrPromise = []
-
+        let arrSrc = Richtext.extractAllSrc(para.richtext),
+            arrPrm = []
         for (let i in arrSrc) {
-            arrPromise[i] = new Promise(function (resolve, reject) {
-                fs.unlink(arrSrc [i].replace(para.pathHead.dbUrl, para.pathHead.dbFolder), err => {
+            arrPrm[i] = new Promise(function (resolve, reject) {
+                fs.unlink(arrSrc[i].replace(para.pathHead.dbUrl, para.pathHead.dbFolder), err => {
                     if (err) throw err
                     resolve()
                 })
             })
         }
 
-        Promise.all(arrPromise).then(function () {
+        Promise.all(arrPrm).then(function () {
             resolve({code: 0, message: '删除成功'})
         })
     })
 }
 
 // 富文本更新
-function richtextReturn (para) {
+function richtextUpdate (para) {
     // para.pathHead 路径头部
     // para.pathHead.dbFolder 数据库文件夹
     // para.pathHead.dbUrl 数据库URL
@@ -375,8 +354,8 @@ function richtextReturn (para) {
 
     return new Promise(function (resolve, reject) {
         let richtextReturn = para.richtextNew,
-            arrSrcNew = richtextGetSrc(para.richtextNew),
-            arrSrcOld = richtextGetSrc(para.richtextOld)
+            arrSrcNew = Richtext.extractAllSrc(para.richtextNew),
+            arrSrcOld = Richtext.extractAllSrc(para.richtextOld)
 
         let dbFolder = para.pathHead.dbFolder + 
             (para.dataunitId ? '/' + para.dataunitId : '') +
@@ -387,17 +366,17 @@ function richtextReturn (para) {
 
         new Promise(function (resolve, reject) {
             // 创建数据库文件夹
-            fs.mkdir(dbFolder, {recursive: true}, (err) => {
+            fs.mkdir(dbFolder, {recursive: true}, err => {
                 if (err) console.log(err)
                 resolve()
             })
         }).then(function () {
             new Promise(function (resolve, reject) {
-                let arrPromise = []
+                let arrPrm = []
                 for (let i in arrSrcNew) {
                     // 处理富文本 richtextNew 内的新增src
                     if (arrSrcNew [i].startsWith(para.pathHead.uploadUrl)) {
-                        let uploadFilePath = arrSrcNew [i].replace(para.pathHead.uploadUrl, para.pathHead.uploadFolder),
+                        let uploadFilePath = arrSrcNew[i].replace(para.pathHead.uploadUrl, para.pathHead.uploadFolder),
                             dbFilePath = dbFolder + '/' +
                                 (para.dataunitId ? para.dataunitId + '.' : '') +
                                 para.tblName + '.' +
@@ -407,19 +386,18 @@ function richtextReturn (para) {
                                 path.parse(arrSrcNew [i]).ext,
                             dbUrl = dbFilePath.replace(para.pathHead.dbFolder, para.pathHead.dbUrl)
     
-                        arrPromise.push(new Promise(function (resolve, reject) {
+                        arrPrm.push(new Promise(function (resolve, reject) {
                             // 已上传文件转存至数据库文件夹
-                            fs.rename(uploadFilePath, dbFilePath, (err) => {
+                            fs.rename(uploadFilePath, dbFilePath, err => {
                                 if (err) throw err
     
                                 // 重置富文本内新增的src
                                 richtextReturn = richtextReturn.replace(arrSrcNew [i], dbUrl)
-    
                                 resolve()
                             })
                         }))
                     } else {
-                        // 处理富文本 richtextNew 内的原src，原文件保留
+                        // 新src与原src重复处理：不能删除
                         for (let j in arrSrcOld) {
                             if (arrSrcOld [j] === arrSrcNew [i]) {
                                 arrSrcOld [j] = ''
@@ -428,14 +406,14 @@ function richtextReturn (para) {
                     }
                 }
     
-                Promise.all(arrPromise).then(function () {
+                Promise.all(arrPrm).then(function () {
                     resolve()
                 })
             }).then(function () {
-                let arrPromise = []
+                let arrPrm = []
                 for (let i in arrSrcOld) {
                     if (arrSrcOld [i]) {
-                        arrPromise.push(new Promise(function (resolve, reject) {
+                        arrPrm.push(new Promise(function (resolve, reject) {
                             // 删除垃圾文件
                             fs.unlink(arrSrcOld [i].replace(para.pathHead.dbUrl, para.pathHead.dbFolder), err => {
                                 if (err) throw err
@@ -445,7 +423,7 @@ function richtextReturn (para) {
                     }
                 }
     
-                Promise.all(arrPromise).then(function () {
+                Promise.all(arrPrm).then(function () {
                     resolve(richtextReturn)
                 })
             })
@@ -462,5 +440,5 @@ export default {
     imagesUpdate,
     richtextAppend,
     richtextDelete,
-    richtextReturn
+    richtextUpdate
 }

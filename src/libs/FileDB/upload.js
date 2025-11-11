@@ -121,10 +121,13 @@ async function holdSingle(request, response, {
 
         // 成功，检查文件信息是否在请求对象中
         if(result.request.file && result.request.file.filename){
-            return {
-                code: 0,
-                message: '上传成功',
+            return {code: 0, message: '上传成功',
                 file: result.request.file
+                /* file中的关键信息
+                * destination: 文件在服务器上存储的目录路径
+                * filename: 文件在服务器上存储时的新名称（通常是 Multer 自动生成的随机字符串或在 storage 配置中定义的名称）
+                * path: 文件的完整路径（destination + filename）
+                * */
             };
         } else {
             // 这通常发生在未选择文件但 Multer 成功处理请求时
@@ -163,9 +166,7 @@ async function holdArray(request, response, {
 
         // 成功，检查文件列表是否在请求对象中
         if(result.request.files && result.request.files.length > 0){
-            return {
-                code: 0,
-                message: '上传成功',
+            return {code: 0, message: '上传成功',
                 files: result.request.files
             };
         } else {

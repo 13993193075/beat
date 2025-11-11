@@ -2,13 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42d741df-1067-49c6-9b0f-02242e70a4df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/libs/multer/clear.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/libs/readfile/Utf8.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/FileDB/richtext.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/Base64.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/readfile/Base64.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/Base64.js.test.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/readfile/Base64.js.test.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/multer/convert.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/multer/convert.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/multer/clear.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/FileDB/clear.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/multer/convert.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/FileDB/convert.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/multer/ly0.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/FileDB/ImageSave.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/multer/multer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/FileDB/upload.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/readfile/Base64.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/FileDB/base64.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/readfile/Base64.js.test.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/FileDB/base64.js.test.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/readfile/Utf8.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/libs/FileDB/utf8.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,19 +28,19 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="34" />
-          <entry key="project.open.time.0" value="27" />
+          <entry key="project.open.time.0" value="28" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="3" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="35" />
+          <entry key="project.opened" value="36" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="159" />
-          <entry key="json" value="24" />
+          <entry key="js" value="169" />
+          <entry key="json" value="27" />
           <entry key="png" value="1" />
           <entry key="txt" value="4" />
         </counts>
@@ -44,23 +48,23 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="1" />
-          <entry key="JSON" value="24" />
-          <entry key="JavaScript" value="159" />
+          <entry key="JSON" value="27" />
+          <entry key="JavaScript" value="169" />
           <entry key="PLAIN_TEXT" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="cjs" value="37" />
-          <entry key="js" value="5879" />
-          <entry key="json" value="70" />
+          <entry key="js" value="6072" />
+          <entry key="json" value="79" />
           <entry key="txt" value="158" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JSON" value="70" />
-          <entry key="JavaScript" value="5879" />
+          <entry key="JSON" value="79" />
+          <entry key="JavaScript" value="6072" />
           <entry key="PLAIN_TEXT" value="195" />
         </counts>
       </usages-collector>
@@ -71,8 +75,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+            <state relative-caret-position="38">
+              <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -115,6 +119,9 @@
       <find>richtextUpdate</find>
       <find>reject2</find>
       <find>Base64.js</find>
+      <find>(err) =&gt;</find>
+      <find>数组类型字段索引</find>
+      <find>arrPromise</find>
     </findStrings>
     <replaceStrings>
       <replace>cellphone</replace>
@@ -128,6 +135,9 @@
       <replace>richtextUpdate</replace>
       <replace>arrSrc</replace>
       <replace>richtextReturn</replace>
+      <replace>err =&gt;</replace>
+      <replace>多文件索引</replace>
+      <replace>arrPrm</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\ly\beat\src\libs</dir>
@@ -139,9 +149,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/libs/crypto/Hash.js" />
-        <option value="$PROJECT_DIR$/src/libs/Email.js" />
-        <option value="$PROJECT_DIR$/src/libs/ali-sms.js" />
         <option value="$PROJECT_DIR$/src/libs/Ali-SMS.cjs" />
         <option value="$PROJECT_DIR$/src/libs/Ali-SMS.js.txt" />
         <option value="$PROJECT_DIR$/src/libs/Ali-SMS.js" />
@@ -188,8 +195,11 @@
         <option value="$PROJECT_DIR$/src/libs/multer/ly0.js" />
         <option value="$PROJECT_DIR$/src/libs/readfile/utf8.js" />
         <option value="$PROJECT_DIR$/src/libs/readfile/Utf8.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/libs/readfile/Json.js" />
+        <option value="$PROJECT_DIR$/src/libs/FileDB/richtext.js" />
+        <option value="$PROJECT_DIR$/src/libs/FileDB/ImageSave.js" />
+        <option value="$PROJECT_DIR$/src/libs/FileDB/upload.js" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -220,7 +230,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -244,12 +253,13 @@
               <item name="beat" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="libs" type="462c0819:PsiDirectoryNode" />
-              <item name="readfile" type="462c0819:PsiDirectoryNode" />
+              <item name="FileDB" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -259,15 +269,17 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\ly\beat\src\libs\readfile" />
-      <recent name="C:\ly\beat\src\libs\Ali" />
-      <recent name="C:\ly\beat\src\libs\crypto" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\ly\beat\src\libs\multer" />
       <recent name="C:\ly\beat\src\libs\WeChat-Pay" />
       <recent name="C:\ly\beat\src\libs" />
+      <recent name="C:\ly\beat\src\libs\crypto" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\ly\beat\src\libs\FileDB" />
+      <recent name="C:\ly\beat\src\libs\filedb" />
+      <recent name="C:\ly\beat\src\libs\readfile" />
+      <recent name="C:\ly\beat\src\libs\Ali" />
       <recent name="C:\ly\beat\src\libs\crypto" />
     </key>
   </component>
@@ -338,11 +350,12 @@
       <workItem from="1762671096462" duration="16311000" />
       <workItem from="1762743622500" duration="19333000" />
       <workItem from="1762813602601" duration="3862000" />
+      <workItem from="1762855477381" duration="12795000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="198899000" />
+    <option name="totallyTimeSpent" value="211694000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="3" y="-1088" width="1936" height="1056" extended-state="6" />
@@ -516,38 +529,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/multer/multer.js">
+    <entry file="file://$PROJECT_DIR$/src/libs/multer/readfile.js" />
+    <entry file="file://$PROJECT_DIR$/src/libs/FileDB/base64.js.test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3out_trade_no.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/readfile/Json.js" />
+    <entry file="file://$PROJECT_DIR$/src/libs/FileDB/richtext.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-858">
-          <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="513">
+          <caret line="27" column="17" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/multer/readfile.js" />
-    <entry file="file://$PROJECT_DIR$/src/libs/readfile/Base64.js.test.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/multer/ly0.js">
+    <entry file="file://$PROJECT_DIR$/src/libs/FileDB/ImageSave.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+        <state relative-caret-position="299">
+          <caret line="275" lean-forward="true" selection-start-line="275" selection-end-line="275" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/multer/convert.js">
+    <entry file="file://$PROJECT_DIR$/src/libs/FileDB/upload.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="11" column="41" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="41" />
+        <state relative-caret-position="2408">
+          <caret line="128" column="55" selection-start-line="128" selection-start-column="55" selection-end-line="128" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/multer/clear.js">
+    <entry file="file://$PROJECT_DIR$/src/libs/FileDB/base64.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1523">
+          <caret selection-end-line="3" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/FileDB/utf8.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="20" selection-start-column="20" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/FileDB/clear.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
           <caret line="32" selection-start-line="32" selection-end-line="32" />
@@ -557,37 +591,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3out_trade_no.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/readfile/Base64.js">
+    <entry file="file://$PROJECT_DIR$/src/libs/FileDB/convert.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="20" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/readfile/Utf8.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="20" selection-start-column="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/readfile/Json.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="2" column="30" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+        <state relative-caret-position="171">
+          <caret line="10" column="3" lean-forward="true" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        <state relative-caret-position="38">
+          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
         </state>
       </provider>
     </entry>
