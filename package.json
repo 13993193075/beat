@@ -1,42 +1,44 @@
 {
-  "name": "@yoooloo42/beat",
-  "version": "1.0.27",
-  "description": "",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/13993193075/beat.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/13993193075/beat/issues"
-  },
-  "homepage": "https://github.com/13993193075/beat#readme",
-  "dependencies": {
-    "@alicloud/ocr20191230": "^4.0.1",
-    "@alicloud/openapi-client": "^0.4.15",
-    "@alicloud/pop-core": "^1.8.0",
-    "@yoooloo42/bean": "^1.0.14",
-    "aliyun-api-gateway": "^1.1.6",
-    "axios": "^1.13.2",
-    "cheerio": "^1.1.2",
-    "multer": "^2.0.2",
-    "nodemailer": "^7.0.10",
-    "xml2js": "^0.6.2"
-  },
-  "exports": {
-    "./libs/*": "./src/libs/*.js",
-    "./libs/Ali/*": "./src/libs/Ali/*.js",
-    "./libs/crypto/*": "./src/libs/crypto/*.js",
-    "./libs/FileDB/*": "./src/libs/FileDB/*.js",
-    "./libs/WeChat/*": "./src/libs/WeChat/*.js",
-    "./libs/WeChat-Pay/*": "./src/libs/WeChat-Pay/*.js"
-  },
-  "files": [
-    "src"
-  ]
+    "name": "@yoooloo42/beat",
+    "version": "1.0.29",
+    "description": "",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/13993193075/beat.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/13993193075/beat/issues"
+    },
+    "homepage": "https://github.com/13993193075/beat#readme",
+    "dependencies": {
+        "@alicloud/ocr20191230": "^4.0.1",
+        "@alicloud/openapi-client": "^0.4.15",
+        "@alicloud/pop-core": "^1.8.0",
+        "@yoooloo42/bean": "^1.0.16",
+        "aliyun-api-gateway": "^1.1.6",
+        "axios": "^1.13.2",
+        "cheerio": "^1.1.2",
+        "multer": "^2.0.2",
+        "nodemailer": "^7.0.10",
+        "xml2js": "^0.6.2"
+    },
+    "exports": {
+        "./Ali/*": "./src/Ali/*.js",
+        "./crypto/*": "./src/crypto/*.js",
+        "./Email/*": "./src/Email/*.js",
+        "./Feie/*": "./src/Feie/*.js",
+        "./FileDB/*": "./src/FileDB/*.js",
+        "./WeChat/*": "./src/WeChat/*.js",
+        "./WeChat-Pay/*": "./src/WeChat-Pay/*.js",
+        "./Yizoo/*": "./src/Yizoo/*.js"
+    },
+    "files": [
+        "src"
+    ]
 }

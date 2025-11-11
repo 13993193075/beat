@@ -1,0 +1,29 @@
+import Ali from './Ali/index.js'
+import crypto from './crypto/index.js'
+import Email from './Email/index.js'
+import Feie from './Feie/index.js'
+import FileDB from './FileDB/index.js'
+import WeChat from './WeChat/index.js'
+import WeChat_Pay from './WeChat-Pay/index.js'
+import Yizoo from './Yizoo/index.js'
+
+export {
+    Ali,
+    crypto,
+    Email,
+    Feie,
+    FileDB,
+    WeChat,
+    WeChat_Pay,
+    Yizoo
+}
+export default {
+    Ali,
+    crypto,
+    Email,
+    Feie,
+    FileDB,
+    WeChat,
+    WeChat_Pay,
+    Yizoo
+}
