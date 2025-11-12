@@ -1,7 +1,7 @@
 // 驿町管家智能门锁
 // http://www.yizoo.net/
 
-import Request from 'request'
+import axios from 'axios'
 
 // 获取令牌
 function openSmartLogin(para){
@@ -10,29 +10,27 @@ function openSmartLogin(para){
     // para.password 密码
 
     return new Promise((resolve, reject) => {
-        Request({
-            url: para.url,
-            method: 'POST',
-            json: true,
-            headers: {
-                'Content-Type': 'text/json;charset=utf-8',
-                'Content-Version': '1.0' // 接口版本，不填则默认获取1.0版本
-            },
-            body: {
+        axios.post(
+            para.url,
+            {
                 method: 'openSmartLogin', // 接口方法
                 data: {
                     accountName: para.accountName,
                     password: para.password
                 }
+            },
+            {
+                headers: {
+                    'Content-Type': 'text/json;charset=utf-8',
+                    'Content-Version': '1.0' // 接口版本，不填则默认获取1.0版本
+                }
             }
-        }, function (error, response, body) {
-            if (error) throw error
-
-            let msgId = body.msgId,
-                resultCode = body.resultCode,
-                reason = body.reason,
-                method = body.method,
-                data = body.data
+        ).then(response=>{
+            let msgId = response.data.msgId,
+                resultCode = response.data.resultCode,
+                reason = response.data.reason,
+                method = response.data.method,
+                data = response.data.data
 
             if (resultCode !== 0) {
                 return resolve({code: 1, message: '获取 tokenid 失败：' + reason})
@@ -44,6 +42,8 @@ function openSmartLogin(para){
                     expireTime: data.expireTime // 有效时长（单位：秒）
                 }
             })
+        }).catch(err=>{
+            throw err
         })
     })
 }

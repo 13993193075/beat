@@ -1,6 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
+import json from '@rollup/plugin-json';
 
 // 判断是否为生产环境（通过运行命令时传入的环境变量判断）
 const isProduction = process.env.NODE_ENV === 'production';
@@ -11,6 +12,10 @@ export default {
 
     // 2. 插件列表 (Rollup 是通过插件扩展功能的)
     plugins: [
+        // 关键顺序：
+        // JSON 插件：优先处理所有 JSON 文件的导入
+        json(),
+
         // 允许 Rollup 导入 node_modules 中的依赖
         resolve(),
 
@@ -35,5 +40,15 @@ export default {
             format: 'esm',
             sourcemap: true,
         }
+    ],
+
+    // 声明所有 Node.js 专用或不希望打包的第三方模块
+    external: [
+        'request',
+        'nodemailer',
+        // 常见的 Node.js 内置模块也应声明
+        'fs',
+        'path',
+        'crypto'
     ],
 };

@@ -1,6 +1,6 @@
 // v2客户付款码付款
 
-import req from 'request'
+import axios from 'axios'
 import xml2js from 'xml2js'
 import Hash from '../crypto/Hash.js'
 import {unclassified as beanUnclass} from '@yoooloo42/bean';
@@ -48,14 +48,11 @@ function v2micropay(para){
         let sign = Hash.md5(textSign).toUpperCase()
         textBody = '<xml>' + textBody + '<sign>' + sign + '</sign>' + '</xml>'
 
-        req({
-            url: "https://api.mch.weixin.qq.com/pay/micropay",
-            method: "POST",
-            body: textBody
-        }, function (err, response, rtn_body) {
-            if (err) throw err
-
-            xmlToJson(rtn_body, function (err, result) {
+        axios.post(
+            "https://api.mch.weixin.qq.com/pay/micropay",
+            textBody
+        ).then(response=>{
+            xmlToJson(response.data, function (err, result) {
                 let rtn_bodyJson = result.xml
                 console.log("支付回调结果：", rtn_bodyJson);
 
@@ -69,6 +66,8 @@ function v2micropay(para){
                     })
                 }
             })
+        }).catch(err=>{
+            throw err
         })
     })
 }

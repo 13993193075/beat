@@ -1,7 +1,7 @@
 // v3签名：所有的v3请求都由这里向微信支付接口的后台发出
 
 import {unclassified as beanUnclass} from '@yoooloo42/bean';
-import req from 'request'
+import axios from 'axios'
 import RSA from '../crypto/RSA.js'
 const random = beanUnclass.random
 const para_global = {
@@ -34,30 +34,33 @@ function v3sign(para){
 
         // RSA-SHA256签名
         let signature = RSA.rsaSign({text, privateKey: para.private_key})
-        req({
-            url: para.host + para.url,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'User-Agent': 'Chrome/17.0.963.56',
-                'Authorization': 'WECHATPAY2-SHA256-RSA2048' + ' ' +
-                    'serial_no="' + para.serial_no + '",' +
-                    'mchid="' + para.mchid + '",' +
-                    'nonce_str="' + nonce_str + '",' +
-                    'timestamp="' + timestamp_seconds + '",' +
-                    'signature="' + signature + '"'
-            },
-            method,
-            body: strBody
-        }, function (err, res, body) {
-            if(!body){
+        axios.post(
+            para.host + para.url,
+            strBody,
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'User-Agent': 'Chrome/17.0.963.56',
+                    'Authorization': 'WECHATPAY2-SHA256-RSA2048' + ' ' +
+                        'serial_no="' + para.serial_no + '",' +
+                        'mchid="' + para.mchid + '",' +
+                        'nonce_str="' + nonce_str + '",' +
+                        'timestamp="' + timestamp_seconds + '",' +
+                        'signature="' + signature + '"'
+                }
+            }
+        ).then(response=>{
+            if(!response.data){
                 return resolve({code: 1, message: "v3签名失败"})
             }
 
-            let objV3Result = JSON.parse(body)
+            let objV3Result = JSON.parse(response.data)
             resolve({code: 0, message: "v3签名完成",
                 objV3Result
             })
+        }).catch(err=>{
+            throw err
         })
     })
 }
