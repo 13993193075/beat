@@ -3,8 +3,13 @@
     "version": "1.0.29",
     "description": "",
     "type": "module",
+    "main": "dist/index.cjs.js",
+    "module": "dist/index.esm.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "clean": "rm -rf dist",
+        "build": "npm run clean && rollup -c",
+        "build:prod": "cross-env NODE_ENV=production npm run build",
+        "watch": "rollup -c -w"
     },
     "repository": {
         "type": "git",
@@ -20,7 +25,7 @@
         "@alicloud/ocr20191230": "^4.0.1",
         "@alicloud/openapi-client": "^0.4.15",
         "@alicloud/pop-core": "^1.8.0",
-        "@yoooloo42/bean": "^1.0.16",
+        "@yoooloo42/bean": "^1.0.21",
         "aliyun-api-gateway": "^1.1.6",
         "axios": "^1.13.2",
         "cheerio": "^1.1.2",
@@ -29,16 +34,21 @@
         "xml2js": "^0.6.2"
     },
     "exports": {
-        "./Ali/*": "./src/Ali/*.js",
-        "./crypto/*": "./src/crypto/*.js",
-        "./Email/*": "./src/Email/*.js",
-        "./Feie/*": "./src/Feie/*.js",
-        "./FileDB/*": "./src/FileDB/*.js",
-        "./WeChat/*": "./src/WeChat/*.js",
-        "./WeChat-Pay/*": "./src/WeChat-Pay/*.js",
-        "./Yizoo/*": "./src/Yizoo/*.js"
+        ".": {
+            "import": "./dist/index.esm.js",
+            "require": "./dist/index.cjs.js"
+        },
+        "./*": "./*",
+        "./dist/*": "./dist/*"
     },
     "files": [
-        "src"
-    ]
+        "dist"
+    ],
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^29.0.0",
+        "@rollup/plugin-node-resolve": "^16.0.3",
+        "@rollup/plugin-terser": "^0.4.4",
+        "cross-env": "^10.1.0",
+        "rollup": "^4.53.2"
+    }
 }

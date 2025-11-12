@@ -1,8 +1,9 @@
 // v3签名：所有的v3请求都由这里向微信支付接口的后台发出
 
+import {unclassified as beanUnclass} from '@yoooloo42/bean';
 import req from 'request'
-import random from '@yoooloo42/bean/unclassified/random'
 import RSA from '../crypto/RSA.js'
+const random = beanUnclass.random
 const para_global = {
     nonce_str32: random.random(32, '0123456789abcdefghijklmnopqrstuvwxyz') // 32位的随机字符串
 }

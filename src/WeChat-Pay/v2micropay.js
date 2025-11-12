@@ -3,7 +3,8 @@
 import req from 'request'
 import xml2js from 'xml2js'
 import Hash from '../crypto/Hash.js'
-import random from '@yoooloo42/bean/unclassified/random'
+import {unclassified as beanUnclass} from '@yoooloo42/bean';
+const random = beanUnclass.random
 const xmlToJson = (new xml2js.Parser()).parseString // xml to json
 const para_global = {
     nonce_str32: random.random(32, '0123456789abcdefghijklmnopqrstuvwxyz') // 32位的随机字符串

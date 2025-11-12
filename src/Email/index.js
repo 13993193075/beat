@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
-import random from '@yoooloo42/bean/unclassified/random';
+import {unclassified as beanUnclass} from '@yoooloo42/bean';
+const random = beanUnclass.random
 
 /**
  * Node.js 项目中发送电子邮件的函数
