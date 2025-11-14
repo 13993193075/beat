@@ -47,7 +47,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="cjs" value="37" />
-          <entry key="js" value="9394" />
+          <entry key="js" value="9404" />
           <entry key="json" value="166" />
           <entry key="txt" value="158" />
         </counts>
@@ -55,7 +55,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="166" />
-          <entry key="JavaScript" value="9394" />
+          <entry key="JavaScript" value="9404" />
           <entry key="PLAIN_TEXT" value="195" />
         </counts>
       </usages-collector>
@@ -66,8 +66,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DB-Bridge/mongodb.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="682">
-              <caret line="206" column="10" selection-start-line="206" selection-start-column="10" selection-end-line="206" selection-end-column="10" />
+            <state relative-caret-position="250">
+              <caret line="200" column="28" selection-start-line="200" selection-start-column="28" selection-end-line="200" selection-end-column="28" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -235,7 +235,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="3" />
     <option name="y" value="-1088" />
     <option name="width" value="1936" />
@@ -372,12 +372,12 @@
       <workItem from="1762880837674" duration="191000" />
       <workItem from="1762937465778" duration="6591000" />
       <workItem from="1762954640478" duration="5504000" />
-      <workItem from="1763007016706" duration="34061000" />
+      <workItem from="1763007016706" duration="34466000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="268190000" />
+    <option name="totallyTimeSpent" value="268595000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="3" y="-1088" width="1936" height="1056" extended-state="6" />
@@ -689,8 +689,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DB-Bridge/mongodb.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="206" column="10" selection-start-line="206" selection-start-column="10" selection-end-line="206" selection-end-column="10" />
+        <state relative-caret-position="250">
+          <caret line="200" column="28" selection-start-line="200" selection-start-column="28" selection-end-line="200" selection-end-column="28" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>

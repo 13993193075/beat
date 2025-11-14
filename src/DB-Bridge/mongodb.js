@@ -198,7 +198,7 @@ async function exec({para, database, collection}) {
             })
         }catch (err) {
             // throw err
-            return ({code: 0, message: '查询多条记录失败',
+            return ({code: 1, message: '查询多条记录失败',
                 err
             })
         }
@@ -206,6 +206,13 @@ async function exec({para, database, collection}) {
 
     // 查询一条记录
     if (para.operator === 'findOne') {
+        try {
 
+        }catch (err) {
+            // throw err
+            return ({code: 1, message: '查询一条记录失败',
+                err
+            })
+        }
     }
 }
