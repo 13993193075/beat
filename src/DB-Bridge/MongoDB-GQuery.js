@@ -84,11 +84,11 @@ async function GQuery({para, db}) {
         if(para.populate && para.schema){
             let populate = []
             para.populate.forEach(i => {
-                if (Object.keys(para.schema).includes(i) && para.schema[i].ref_collection) {
+                if (Object.keys(para.schema).includes(i) && para.schema[i].ref_tblName) {
                     populate.push({
-                        key: i,
-                        ref_collection: para.schema[i].ref_collection,
-                        ref_key: para.schema[i].ref_key
+                        fldName: i,
+                        ref_tblName: para.schema[i].ref_tblName,
+                        ref_fldName: para.schema[i].ref_fldName
                     })
                 }
             })
