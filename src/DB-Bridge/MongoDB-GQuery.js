@@ -2,9 +2,7 @@ import {MongoClient} from 'mongodb'
 import schema from './schema.js'
 
 // 泛查询
-async function GQuery(para) {
-    // para.connectionUrl 连接字
-    // para.dbName 数据库名
+async function GQuery({para, db}) {
     // para.tblName 表名（集合名）
     // para.schema 表模型（集合模型）
     // para.operator 操作符
@@ -28,145 +26,118 @@ async function GQuery(para) {
     // para.upsert updateMany, updateOne 未查中：插入新记录
     // paraExec.aggregate 聚合管道参数
 
-    if(!para.connectionUrl){
-        return {code: 1, message: '连接字不存在'}
-    }
-
-    if(!para.dbName){
-        return {code: 1, message: '数据库名不存在'}
-    }
-
-    if(!para.tblName){
-        return {code: 1, message: '表名不存在'}
-    }
-
-    // 执行参数
-    let paraExec = {}
-
-    // 操作符
-    if(!para.operator || ![
-        "find",
-        "findOne",
-        "countDocuments",
-        "insertMany",
-        "insertOne",
-        "updateMany",
-        "updateOne",
-        "deleteMany",
-        "deleteOne",
-        "aggregate",
-    ].includes(para.operator)){
-        return {code: 1, message: '操作符不存在或非法'}
-    }
-    paraExec.operator = para.operator
-
-    // 查询对象
-    if(!para.query || [
-        "find",
-        "findOne",
-        "countDocuments",
-        "updateMany",
-        "updateOne",
-        "deleteMany",
-        "deleteOne"
-    ].includes(para.operator)){
-        return {code: 1, message: '查询对象不存在'}
-    }
-    paraExec.query = para.query ? para.query : null
-    if(paraExec.query && para.schema){
-        // 数据类型一致性强制
-        paraExec.query = schema.DTCE({data: para.query, schema: para.schema})
-    }
-
-    paraExec.limit = para.limit ? para.limit : 0 // 页记录数
-    paraExec.skip = para.skip ? para.skip : 0 // 跳过记录数
-    paraExec.sort = para.sort ? para.sort : null // 排序
-
-    // 关联查询
-    paraExec.reference = para.reference ? para.reference : null
-    if(para.populate && para.schema){
-        let populate = []
-        para.populate.forEach(i => {
-            if (Object.keys(para.schema).includes(i) && para.schema[i].ref_collection) {
-                populate.push({
-                    key: i,
-                    ref_collection: para.schema[i].ref_collection,
-                    ref_key: para.schema[i].ref_key
-                })
-            }
-        })
-        if(populate.length > 0){
-            paraExec.reference = paraExec.reference ? paraExec.reference : []
-            paraExec.reference = paraExec.reference.concat(populate) // 并入paraExec.reference
-        }
-    }
-
-    // 输出字段
-    paraExec.outFields = para.outFields ? {} : null
-    if(para.outFields){
-        // mongodb语法转义示例：{"_id": 1, "name": 1}
-        for (let i = 0; i < para.outFields.length; i++) {
-            paraExec.outFields[para.outFields[i]] = 1
-        }
-    }
-
-    // 数据更新对象
-    paraExec.update = para.update ? para.update : null
-    if(paraExec.update && para.schema){
-        // 数据类型一致性强制
-        paraExec.update = schema.DTCE({data: para.update, schema: para.schema})
-    }
-    if (paraExec.operator === 'updateMany' || paraExec.operator === 'updateOne') {
-        // 附加原子操作符：$set
-        if (!Object.keys(paraExec.update).length > 0 || Object.keys(paraExec.update)[0].toLowerCase() !== '$set') {
-            paraExec.update = {$set: paraExec.update}
-        }
-    }
-
-    // updateMany, updateOne 未查中：插入新记录
-    paraExec.upsert = !!para.upsert
-
-    // 聚合管道参数
-    paraExec.aggregate = para.aggregate ? para.aggregate : null
-
-    const client = new MongoClient(para.connectionUrl);
     try {
-        // 1. 建立连接
-        await client.connect();
+        if(!para.tblName){
+            return {code: 1, message: '表名不存在'}
+        }
 
-        // 2. 选择数据库
-        const database = client.db(para.dbName);
+        // 执行参数
+        let paraExec = {}
 
-        // 3. 选择集合 (Collection)
-        const collection = database.collection(para.tblName);
+        // 表名
+        if(!para.tblName){
+            return {code: 1, message: '表名不存在'}
+        }
+        paraExec.tblName = para.tblName
 
-        // 4. 执行操作 (例如：插入一条数据)
-        const result = await exec({para: paraExec, database, collection});
+        // 操作符
+        if(!para.operator || ![
+            "find",
+            "findOne",
+            "countDocuments",
+            "insertMany",
+            "insertOne",
+            "updateMany",
+            "updateOne",
+            "deleteMany",
+            "deleteOne",
+            "aggregate",
+        ].includes(para.operator)){
+            return {code: 1, message: '操作符不存在或非法'}
+        }
+        paraExec.operator = para.operator
+
+        // 查询对象
+        if(!para.query || [
+            "find",
+            "findOne",
+            "countDocuments",
+            "updateMany",
+            "updateOne",
+            "deleteMany",
+            "deleteOne"
+        ].includes(para.operator)){
+            return {code: 1, message: '查询对象不存在'}
+        }
+        paraExec.query = para.query ? para.query : null
+        if(paraExec.query && para.schema){
+            // 数据类型一致性强制
+            paraExec.query = schema.DTCE({data: para.query, schema: para.schema})
+        }
+
+        paraExec.limit = para.limit ? para.limit : 0 // 页记录数
+        paraExec.skip = para.skip ? para.skip : 0 // 跳过记录数
+        paraExec.sort = para.sort ? para.sort : null // 排序
+
+        // 关联查询
+        paraExec.reference = para.reference ? para.reference : null
+        if(para.populate && para.schema){
+            let populate = []
+            para.populate.forEach(i => {
+                if (Object.keys(para.schema).includes(i) && para.schema[i].ref_collection) {
+                    populate.push({
+                        key: i,
+                        ref_collection: para.schema[i].ref_collection,
+                        ref_key: para.schema[i].ref_key
+                    })
+                }
+            })
+            if(populate.length > 0){
+                paraExec.reference = paraExec.reference ? paraExec.reference : []
+                paraExec.reference = paraExec.reference.concat(populate) // 并入paraExec.reference
+            }
+        }
+
+        // 输出字段
+        paraExec.outFields = para.outFields ? {} : null
+        if(para.outFields){
+            // mongodb语法转义示例：{"_id": 1, "name": 1}
+            for (let i = 0; i < para.outFields.length; i++) {
+                paraExec.outFields[para.outFields[i]] = 1
+            }
+        }
+
+        // 数据更新对象
+        paraExec.update = para.update ? para.update : null
+        if(paraExec.update && para.schema){
+            // 数据类型一致性强制
+            paraExec.update = schema.DTCE({data: para.update, schema: para.schema})
+        }
+        if (paraExec.operator === 'updateMany' || paraExec.operator === 'updateOne') {
+            // 附加原子操作符：$set
+            if (!Object.keys(paraExec.update).length > 0 || Object.keys(paraExec.update)[0].toLowerCase() !== '$set') {
+                paraExec.update = {$set: paraExec.update}
+            }
+        }
+
+        // updateMany, updateOne 未查中：插入新记录
+        paraExec.upsert = !!para.upsert
+
+        // 聚合管道参数
+        paraExec.aggregate = para.aggregate ? para.aggregate : null
+
+        return await exec({para: paraExec, db})
     } catch (error) {
-        console.error("数据库 " + para.dbName + " 连接或操作出错：", error);
-    } finally {
-        // 5. 确保连接最终被关闭
-        await client.close();
-        console.log("数据库 " + para.dbName +" 连接已关闭");
+        return {code: 1, message: "执行泛查询错误：" + error}
     }
 }
 
 // 泛查询 - 执行
-async function exec({para, database, collection}) {
-    // para.operator
-    // para.query
-    // para.limit
-    // para.skip
-    // para.sort
-    // para.reference
-    // para.showFields
-    // para.update
-    // para.upsert
-    // para.aggregate
-
+async function exec({para, db}) {
     // 查询多条记录
     if (para.operator === 'find') {
         try {
+            const collection = db.collection(para.tblName)
             // 同步返回游标
             const cursor = collection.find(para.query)
             if (para.limit > 0) {
@@ -187,7 +158,7 @@ async function exec({para, database, collection}) {
             if(data.length > 0 && para.reference){
                 data.forEach(iData=>{
                     para.reference.forEach(async iRef=>{
-                        const collectionRef = database.collection(iRef.ref_tblName)
+                        const collectionRef = db.collection(iRef.ref_tblName)
                         let q = {} // query
                         q[iRef.ref_fldName] = iData[iRef.fldName]
                         iData[iRef.fldName] = await collectionRef.findOne(q)
@@ -220,7 +191,7 @@ async function exec({para, database, collection}) {
             // 关联查询
             if(data && para.reference){
                 para.reference.forEach(async iRef=>{
-                    const collectionRef = database.collection(iRef.ref_tblName)
+                    const collectionRef = db.collection(iRef.ref_tblName)
                     let q = {} // query
                     q[iRef.ref_fldName] = data[iRef.fldName]
                     data[iRef.fldName] = await collectionRef.findOne(q)
@@ -364,4 +335,11 @@ async function exec({para, database, collection}) {
             })
         }
     }
+}
+
+export {
+    GQuery
+}
+export default {
+    GQuery
 }

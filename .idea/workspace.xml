@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42d741df-1067-49c6-9b0f-02242e70a4df" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/DB-Bridge/MongoDB.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DB-Bridge/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DB-Bridge/mongodb.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/DB-Bridge/mongodb.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DB-Bridge/mongodb.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/DB-Bridge/MongoDB-GQuery.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DB-Bridge/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/DB-Bridge/schema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -31,7 +35,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="1" />
-          <entry key="js" value="280" />
+          <entry key="js" value="289" />
           <entry key="json" value="33" />
           <entry key="png" value="1" />
           <entry key="txt" value="5" />
@@ -41,14 +45,14 @@
         <counts>
           <entry key="Image" value="1" />
           <entry key="JSON" value="33" />
-          <entry key="JavaScript" value="280" />
+          <entry key="JavaScript" value="289" />
           <entry key="PLAIN_TEXT" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="cjs" value="37" />
-          <entry key="js" value="9853" />
+          <entry key="js" value="10251" />
           <entry key="json" value="166" />
           <entry key="txt" value="158" />
         </counts>
@@ -56,7 +60,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="166" />
-          <entry key="JavaScript" value="9853" />
+          <entry key="JavaScript" value="10251" />
           <entry key="PLAIN_TEXT" value="195" />
         </counts>
       </usages-collector>
@@ -64,11 +68,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/DB-Bridge/mongodb.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DB-Bridge/MongoDB-GQuery.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="355" selection-start-line="355" selection-end-line="355" />
+            <state relative-caret-position="928">
+              <caret line="167" lean-forward="true" selection-start-line="167" selection-end-line="167" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -76,15 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DB-Bridge/schema.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/DB-Bridge/MongoDB.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#51#83#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="810">
+              <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -100,9 +100,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>v3Api</find>
-      <find>crypto0</find>
-      <find>package</find>
       <find>crypto</find>
       <find>js_code</find>
       <find>para.src</find>
@@ -128,8 +125,11 @@
       <find>typeFromSchema</find>
       <find>para.collection</find>
       <find>para</find>
-      <find>dbName</find>
       <find>para.tblname</find>
+      <find>database</find>
+      <find>dbName</find>
+      <find>para.db</find>
+      <find>db</find>
     </findStrings>
     <replaceStrings>
       <replace>cellphone</replace>
@@ -166,10 +166,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/libs/upload/multer.js" />
-        <option value="$PROJECT_DIR$/src/libs/multer/transfer.js" />
-        <option value="$PROJECT_DIR$/src/libs/multer/multer.js" />
-        <option value="$PROJECT_DIR$/src/libs/multer/clear.js" />
         <option value="$PROJECT_DIR$/src/libs/multer/readfile.js" />
         <option value="$PROJECT_DIR$/src/libs/multer/convert.js" />
         <option value="$PROJECT_DIR$/src/libs/multer/ly0.js" />
@@ -208,15 +204,19 @@
         <option value="$PROJECT_DIR$/src/WeChat-Pay/v3native.js" />
         <option value="$PROJECT_DIR$/src/WeChat-Pay/v3out_trade_no.js" />
         <option value="$PROJECT_DIR$/src/WeChat-Pay/index.js" />
-        <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/test.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/WeChat-Pay/v3sign.js" />
         <option value="$PROJECT_DIR$/src/WeChat-Pay/v2micropay.js" />
         <option value="$PROJECT_DIR$/src/Yizoo/index.js" />
         <option value="$PROJECT_DIR$/rollup.config.js" />
-        <option value="$PROJECT_DIR$/src/DB-Bridge/schema.js" />
         <option value="$PROJECT_DIR$/src/DB-Bridge/mongodb.js" />
+        <option value="$PROJECT_DIR$/src/DB-Bridge/db.js" />
+        <option value="$PROJECT_DIR$/src/DB-Bridge/schema.js" />
+        <option value="$PROJECT_DIR$/src/DB-Bridge/MongoDB.js" />
+        <option value="$PROJECT_DIR$/src/DB-Bridge/MongoDB-GQuery.js" />
+        <option value="$PROJECT_DIR$/src/DB-Bridge/index.js" />
+        <option value="$PROJECT_DIR$/src/index.js" />
       </list>
     </option>
   </component>
@@ -265,6 +265,24 @@
               <item name="beat" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="DB-Bridge" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="beat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="beat" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Email" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="beat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="beat" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Feie" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="beat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="beat" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="FileDB" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -374,12 +392,12 @@
       <workItem from="1762937465778" duration="6591000" />
       <workItem from="1762954640478" duration="5504000" />
       <workItem from="1763007016706" duration="40338000" />
-      <workItem from="1763179853830" duration="2811000" />
+      <workItem from="1763179853830" duration="9196000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="277278000" />
+    <option name="totallyTimeSpent" value="283663000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -412,8 +430,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3.close.js" />
-    <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v2.utils.js" />
     <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3.nativepay.js" />
     <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3.jsapi.js" />
     <entry file="file://$PROJECT_DIR$/src/libs/WeChat-Pay/v3.config.js" />
@@ -490,13 +506,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FileDB/base64.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="669">
-          <caret line="117" column="6" selection-start-line="117" selection-start-column="6" selection-end-line="117" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FileDB/clear.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="593">
@@ -546,13 +555,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FileDB/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/WeChat/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
@@ -568,21 +570,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test.js" />
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="38" lean-forward="true" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Ali/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="7" lean-forward="true" selection-start-column="7" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Email/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="7" lean-forward="true" selection-start-column="7" selection-end-column="7" />
@@ -669,24 +657,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DB-Bridge/mongodb.js">
+    <entry file="file://$PROJECT_DIR$/src/Email/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="355" selection-start-line="355" selection-end-line="355" />
+        <state>
+          <caret column="7" lean-forward="true" selection-start-column="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileDB/base64.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="966">
+          <caret line="117" column="6" selection-start-line="117" selection-start-column="6" selection-end-line="117" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DB-Bridge/schema.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="719">
+          <caret line="68" column="6" selection-start-line="68" selection-start-column="6" selection-end-line="68" selection-end-column="6" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#51#83#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileDB/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="7" lean-forward="true" selection-start-column="7" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="24" column="14" lean-forward="true" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DB-Bridge/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DB-Bridge/MongoDB-GQuery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="928">
+          <caret line="167" lean-forward="true" selection-start-line="167" selection-end-line="167" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DB-Bridge/schema.js">
+    <entry file="file://$PROJECT_DIR$/src/DB-Bridge/MongoDB.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#51#83#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="810">
+          <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
         </state>
       </provider>
     </entry>

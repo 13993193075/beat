@@ -66,6 +66,9 @@ function DTCE({data, TypeFromSchema, schema}){
     return data
 }
 
+export {
+    DTCE
+}
 export default {
     DTCE
 }
