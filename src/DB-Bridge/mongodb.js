@@ -166,6 +166,7 @@ async function exec({para, database, collection}) {
     // 查询多条记录
     if (para.operator === 'find') {
         try {
+            // 同步返回游标
             const cursor = collection.find(para.query)
             if (para.limit > 0) {
                 cursor.limit(para.limit)
@@ -194,7 +195,7 @@ async function exec({para, database, collection}) {
             }
 
             return ({code: 0, message: '查询多条记录成功',
-                data: data ? data : []
+                data
             })
         }catch (err) {
             // throw err
@@ -207,10 +208,132 @@ async function exec({para, database, collection}) {
     // 查询一条记录
     if (para.operator === 'findOne') {
         try {
+            // 异步返回数据
+            let data = null
+            if(para.showFields){
+                data = await collection.findOne(para.query, {projection: para.showFields})
+            }else{
+                data = await collection.findOne(para.query)
+            }
 
+            // 关联查询
+            if(data && para.reference){
+                para.reference.forEach(async iRef=>{
+                    const collectionRef = database.collection(iRef.ref_tblName)
+                    let q = {} // query
+                    q[iRef.ref_fldName] = data[iRef.fldName]
+                    data[iRef.fldName] = await collectionRef.findOne(q)
+                })
+            }
+
+            return ({code: 0, message: '查询一条记录成功',
+                data
+            })
         }catch (err) {
             // throw err
             return ({code: 1, message: '查询一条记录失败',
+                err
+            })
+        }
+    }
+
+    // 计数
+    if (para.operator === 'countDocuments') {
+        try {
+            let count = await collection.countDocuments(para.query)
+
+            return ({code: 0, message: '计数成功',
+                count
+            })
+        }catch (err) {
+            // throw err
+            return ({code: 1, message: '计数失败',
+                err
+            })
+        }
+    }
+
+    // 插入多条记录
+    if (para.operator === 'insertMany') {
+        try {
+            const result = await collection.insertMany(para.update)
+            return ({code: 0, message: '插入多条记录成功',
+                data: Object.values(result.insertedIds) // _id数组
+            })
+        }catch (err) {
+            // throw err
+            return ({code: 1, message: '插入多条记录失败',
+                err
+            })
+        }
+    }
+
+    // 插入一条记录
+    if (para.operator === 'insertOne') {
+        try {
+            const result = await collection.insertOne(para.update)
+            return ({code: 0, message: '插入一条记录成功',
+                data: result.insertedId // _id数组
+            })
+        }catch (err) {
+            // throw err
+            return ({code: 1, message: '插入一条记录失败',
+                err
+            })
+        }
+    }
+
+    // 计数
+    if (para.operator === 'countDocuments') {
+        try {
+            return ({code: 0, message: '计数成功',
+                count
+            })
+        }catch (err) {
+            // throw err
+            return ({code: 1, message: '计数失败',
+                err
+            })
+        }
+    }
+
+    // 计数
+    if (para.operator === 'countDocuments') {
+        try {
+            return ({code: 0, message: '计数成功',
+                count
+            })
+        }catch (err) {
+            // throw err
+            return ({code: 1, message: '计数失败',
+                err
+            })
+        }
+    }
+
+    // 计数
+    if (para.operator === 'countDocuments') {
+        try {
+            return ({code: 0, message: '计数成功',
+                count
+            })
+        }catch (err) {
+            // throw err
+            return ({code: 1, message: '计数失败',
+                err
+            })
+        }
+    }
+
+    // 计数
+    if (para.operator === 'countDocuments') {
+        try {
+            return ({code: 0, message: '计数成功',
+                count
+            })
+        }catch (err) {
+            // throw err
+            return ({code: 1, message: '计数失败',
                 err
             })
         }
