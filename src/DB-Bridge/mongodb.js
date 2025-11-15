@@ -162,6 +162,7 @@ async function exec({para, database, collection}) {
     // para.showFields
     // para.update
     // para.upsert
+    // para.aggregate
 
     // 查询多条记录
     if (para.operator === 'find') {
@@ -273,7 +274,7 @@ async function exec({para, database, collection}) {
         try {
             const result = await collection.insertOne(para.update)
             return ({code: 0, message: '插入一条记录成功',
-                data: result.insertedId // _id数组
+                data: result.insertedId
             })
         }catch (err) {
             // throw err
@@ -283,57 +284,82 @@ async function exec({para, database, collection}) {
         }
     }
 
-    // 计数
-    if (para.operator === 'countDocuments') {
+    // 更新多条记录
+    if (para.operator === 'updateMany') {
+        if(para.upsert){
+            await collection.updateMany(para.query, para.update, para.upsert)
+        }else{
+            await collection.updateMany(para.query, para.update)
+        }
+
         try {
-            return ({code: 0, message: '计数成功',
-                count
-            })
+            return ({code: 0, message: '更新多条记录成功'})
         }catch (err) {
             // throw err
-            return ({code: 1, message: '计数失败',
+            return ({code: 1, message: '更新多条记录失败',
                 err
             })
         }
     }
 
-    // 计数
-    if (para.operator === 'countDocuments') {
+    // 更新一条记录
+    if (para.operator === 'updateOne') {
+        if(para.upsert){
+            await collection.updateOne(para.query, para.update, para.upsert)
+        }else{
+            await collection.updateOne(para.query, para.update)
+        }
+
         try {
-            return ({code: 0, message: '计数成功',
-                count
-            })
+            return ({code: 0, message: '更新一条记录成功'})
         }catch (err) {
             // throw err
-            return ({code: 1, message: '计数失败',
+            return ({code: 1, message: '更新一条记录失败',
                 err
             })
         }
     }
 
-    // 计数
-    if (para.operator === 'countDocuments') {
+    // 删除多条记录
+    if (para.operator === 'deleteMany') {
+        await collection.deleteMany(para.query)
+
         try {
-            return ({code: 0, message: '计数成功',
-                count
-            })
+            return ({code: 0, message: '删除多条记录成功'})
         }catch (err) {
             // throw err
-            return ({code: 1, message: '计数失败',
+            return ({code: 1, message: '删除多条记录失败',
                 err
             })
         }
     }
 
-    // 计数
-    if (para.operator === 'countDocuments') {
+    // 删除一条记录
+    if (para.operator === 'deleteOne') {
+        await collection.deleteOne(para.query)
+
         try {
-            return ({code: 0, message: '计数成功',
-                count
+            return ({code: 0, message: '删除一条记录成功'})
+        }catch (err) {
+            // throw err
+            return ({code: 1, message: '删除一条记录失败',
+                err
+            })
+        }
+    }
+
+    // 聚合查询
+    if (para.operator === 'aggregate') {
+        try {
+            const cursor = collection(para.aggregate)
+            let data = await cursor.toArray()
+
+            return ({code: 1, message: '聚合查询成功',
+                data
             })
         }catch (err) {
             // throw err
-            return ({code: 1, message: '计数失败',
+            return ({code: 1, message: '聚合查询失败',
                 err
             })
         }
