@@ -1,6 +1,6 @@
 {
     "name": "@yoooloo42/beat",
-    "version": "1.0.32",
+    "version": "1.0.33",
     "description": "",
     "type": "module",
     "main": "dist/index.cjs.js",
