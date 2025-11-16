@@ -17,7 +17,7 @@ async function carplate(para) {
 
     if (!appKey || !appSecret) {
         return {
-            code: -1,
+            code: 1,
             message: "AppKey 或 AppSecret 缺失，请配置或传入！"
         };
     }
@@ -59,7 +59,7 @@ async function carplate(para) {
         const errorMessage = err.message || err.stack || "未知错误";
 
         return {
-            code: -1,
+            code: 1,
             message: "车牌识别失败：" + errorMessage
         }
     }

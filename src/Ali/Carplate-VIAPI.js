@@ -70,7 +70,7 @@ async function carplate(para) {
 
         // 统一返回失败信息
         return {
-            code: -1, // 使用 -1 或其他负值表示系统级/网络级错误
+            code: 1, // 使用 -1 或其他负值表示系统级/网络级错误
             message: `车牌识别失败: [${errorCode}] ${errorMessage}`,
             error: error
         };

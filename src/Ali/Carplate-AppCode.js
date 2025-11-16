@@ -15,7 +15,7 @@ async function carplate(para) {
 
     if (!appCode) {
         return {
-            code: -1,
+            code: 1,
             message: "APPCODE 缺失，请配置环境变量 ALIBABA_CLOUD_APPCODE 或传入！"
         };
     }
@@ -57,7 +57,7 @@ async function carplate(para) {
         const errorMessage = err.message || err.stack || "未知错误";
 
         return {
-            code: -1,
+            code: 1,
             message: "车牌识别失败：" + errorMessage
         }
     }
