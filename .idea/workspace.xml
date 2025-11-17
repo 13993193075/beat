@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="42d741df-1067-49c6-9b0f-02242e70a4df" name="Default Changelist" comment="" />
+    <list default="true" id="42d741df-1067-49c6-9b0f-02242e70a4df" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileDB/ImageSave.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileDB/ImageSave.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -15,21 +18,21 @@
     <session id="-2055113757">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="47" />
-          <entry key="project.open.time.0" value="37" />
+          <entry key="project.closed" value="48" />
+          <entry key="project.open.time.0" value="38" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="3" />
           <entry key="project.open.time.5" value="5" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="49" />
+          <entry key="project.opened" value="50" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="1" />
-          <entry key="js" value="316" />
-          <entry key="json" value="37" />
+          <entry key="js" value="317" />
+          <entry key="json" value="38" />
           <entry key="png" value="1" />
           <entry key="txt" value="5" />
         </counts>
@@ -37,35 +40,44 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="1" />
-          <entry key="JSON" value="37" />
-          <entry key="JavaScript" value="316" />
+          <entry key="JSON" value="38" />
+          <entry key="JavaScript" value="317" />
           <entry key="PLAIN_TEXT" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="cjs" value="37" />
-          <entry key="js" value="10290" />
-          <entry key="json" value="168" />
+          <entry key="js" value="10295" />
+          <entry key="json" value="169" />
           <entry key="txt" value="158" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JSON" value="168" />
-          <entry key="JavaScript" value="10290" />
+          <entry key="JSON" value="169" />
+          <entry key="JavaScript" value="10295" />
           <entry key="PLAIN_TEXT" value="195" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/DB-Bridge/MongoDB.js">
+        <entry file="file://$PROJECT_DIR$/src/FileDB/ImageSave.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="42" column="1" lean-forward="true" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+            <state relative-caret-position="679">
+              <caret line="104" column="92" lean-forward="true" selection-start-line="104" selection-start-column="92" selection-end-line="104" selection-end-column="92" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -81,7 +93,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>vRichtextUpdate</find>
       <find>srcArr</find>
       <find>richtextUpdate</find>
       <find>reject2</find>
@@ -111,6 +122,7 @@
       <find>field</find>
       <find>DB</find>
       <find>proce</find>
+      <find>delete</find>
     </findStrings>
     <replaceStrings>
       <replace>cellphone</replace>
@@ -138,6 +150,7 @@
       <replace>ref_tblName</replace>
       <replace>ref_fldName</replace>
       <replace>fldName</replace>
+      <replace>deleteIfNotUploaded</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\ly\beat\src\libs</dir>
@@ -172,7 +185,6 @@
         <option value="$PROJECT_DIR$/src/FileDB/base64.js" />
         <option value="$PROJECT_DIR$/src/FileDB/clear.js" />
         <option value="$PROJECT_DIR$/src/FileDB/convert.js" />
-        <option value="$PROJECT_DIR$/src/FileDB/ImageSave.js" />
         <option value="$PROJECT_DIR$/src/FileDB/richtext.js" />
         <option value="$PROJECT_DIR$/src/FileDB/upload.js" />
         <option value="$PROJECT_DIR$/src/FileDB/utf8.js" />
@@ -199,8 +211,9 @@
         <option value="$PROJECT_DIR$/src/Ali/Carplate-AppKey.js" />
         <option value="$PROJECT_DIR$/src/Ali/Carplate-VIAPI.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/DB-Bridge/MongoDB.js" />
+        <option value="$PROJECT_DIR$/src/FileDB/ImageSave.js" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -242,18 +255,13 @@
             <path>
               <item name="beat" type="b2602c69:ProjectViewProjectNode" />
               <item name="beat" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="beat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="beat" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="beat" type="b2602c69:ProjectViewProjectNode" />
               <item name="beat" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="DB-Bridge" type="462c0819:PsiDirectoryNode" />
+              <item name="FileDB" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -372,11 +380,12 @@
       <workItem from="1763279724498" duration="2832000" />
       <workItem from="1763306056910" duration="556000" />
       <workItem from="1763308118373" duration="741000" />
+      <workItem from="1763371968118" duration="257000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="292307000" />
+    <option name="totallyTimeSpent" value="292564000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -608,13 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FileDB/ImageSave.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1061">
-          <caret line="432" lean-forward="true" selection-start-line="432" selection-end-line="432" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FileDB/upload.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="436">
@@ -678,17 +680,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/src/DB-Bridge/MongoDB.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="24" lean-forward="true" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        <state relative-caret-position="549">
+          <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DB-Bridge/MongoDB.js">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="42" column="1" lean-forward="true" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+        <state relative-caret-position="38">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileDB/ImageSave.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="679">
+          <caret line="104" column="92" lean-forward="true" selection-start-line="104" selection-start-column="92" selection-end-line="104" selection-end-column="92" />
         </state>
       </provider>
     </entry>

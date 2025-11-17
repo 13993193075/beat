@@ -93,7 +93,7 @@ function imageUpdate (para) {
     // para.pathHead.uploadUrl 上传URL
     // para.uploaded 已上传文件的URL
     // para.old 原文件的URL
-    // para.delete 如果没有上传新文件，是否删除原文件
+    // para.deleteIfNotUploaded 如果没有上传新文件，那么删除原文件
 
     // para.dataunitId 数据单元ID
     // para.tblName 表名
@@ -102,7 +102,7 @@ function imageUpdate (para) {
     // para.dataId 数据ID
 
     return new Promise(function (resolve, reject) {
-        if (!!para.uploaded || para.delete === true || para.delete === 'true') {
+        if (!!para.uploaded || para.deleteIfNotUploaded === true || para.deleteIfNotUploaded === 'true') {
             imageDelete({
                 pathHead: {
                     dbFolder: para.pathHead.dbFolder,
