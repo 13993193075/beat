@@ -269,26 +269,27 @@ async function exec({para, db}) {
 
     // 更新多条记录
     if (para.operator === 'updateMany') {
-        // 首先查询待更新的数据
-        const cursorOld = collection.find(para.query)
-        let arrId = []
-        const dataOld = await cursorOld.toArray()
-        dataOld.forEach(i=>{
-            arrId.push(i._id)
-        })
-
-        // 更新数据
-        if(para.upsert){
-            await collection.updateMany({_id: {$in: arrId}}, para.update, para.upsert)
-        }else{
-            await collection.updateMany({_id: {$in: arrId}}, para.update)
-        }
-
-        // 查询新数据
-        const cursorNew = collection.find({_id: {$in: arrId}})
-        const dataNew = await cursorNew.toArray()
-
         try {
+            // 首先查询待更新的数据
+            const cursorOld = collection.find(para.query)
+            const dataOld = await cursorOld.toArray()
+            // 记录新数据的ID（数组）
+            let arrNewId = []
+            dataOld.forEach(i=>{
+                arrNewId.push(i._id)
+            })
+            if(arrNewId.length === 0 && para.upsert){
+                // 查询无果，强制插入一条新记录
+                const result = await collection.updateMany(para.query, para.update, {upsert: true})
+                arrNewId = [result.upsertedId['0']] // result.upsertedId的内容示例：{'0': new ObjectId('60c72b2f9b1d8e001f3f4e5b')}
+            }else if(arrNewId.length > 0){
+                // 更新数据
+                await collection.updateMany({_id: {$in: arrNewId}}, para.update, {upsert: false})
+            }
+            // 查询新数据
+            const cursorNew = collection.find({_id: {$in: arrNewId}})
+            const dataNew = await cursorNew.toArray()
+
             return ({code: 0, message: '更新多条记录成功',
                 dataNew, dataOld // 返回新、旧数据
             })
@@ -302,20 +303,23 @@ async function exec({para, db}) {
 
     // 更新一条记录
     if (para.operator === 'updateOne') {
-        // 首先查询待更新的数据
-        const dataOld = await collection.findOne(para.query)
-
-        // 更新数据
-        if(para.upsert){
-            await collection.updateOne({_id: dataOld._id}, para.update, para.upsert)
-        }else{
-            await collection.updateOne({_id: dataOld._id}, para.update)
-        }
-
-        // 查询新数据
-        const dataNew = await collection.findOne({_id: dataOld._id})
-
         try {
+            // 首先查询待更新的数据
+            const dataOld = await collection.findOne(para.query)
+            // 记录新数据的ID
+            let newId = null
+            if(!dataOld && para.upsert){
+                // 查询无果，强制插入一条新记录
+                const result = await collection.updateOne(para.query, para.update, {upsert: true})
+                newId = result.upsertedId // 这里注意一下和 updateMany 的区别
+            }else if(dataOld){
+                newId = dataOld._id
+                // 更新数据
+                await collection.updateOne({_id: newId}, para.update, {upsert: false})
+            }
+            // 查询新数据
+            const dataNew = await collection.findOne({_id: newId})
+
             return ({code: 0, message: '更新一条记录成功',
                 dataNew, dataOld // 返回新、旧数据
             })
@@ -329,18 +333,20 @@ async function exec({para, db}) {
 
     // 删除多条记录
     if (para.operator === 'deleteMany') {
-        // 首先查询待删除的数据
-        const cursorOld = collection.find(para.query)
-        let arrId = []
-        const dataOld = await cursorOld.toArray()
-        dataOld.forEach(i=>{
-            arrId.push(i._id)
-        })
-
-        // 删除数据
-        await collection.deleteMany({_id: {$in: arrId}})
-
         try {
+            // 首先查询待删除的数据
+            const cursorOld = collection.find(para.query)
+            const dataOld = await cursorOld.toArray()
+            // 记录旧数据的ID（数组）
+            let arrOldId = []
+            dataOld.forEach(i=>{
+                arrOldId.push(i._id)
+            })
+            if(arrOldId.length > 0){
+                // 删除数据
+                await collection.deleteMany({_id: {$in: arrOldId}})
+            }
+
             return ({code: 0, message: '删除多条记录成功',
                 dataOld // 返回旧数据
             })
@@ -354,13 +360,14 @@ async function exec({para, db}) {
 
     // 删除一条记录
     if (para.operator === 'deleteOne') {
-        // 首先查询待删除的数据
-        const dataOld = await collection.findOne(para.query)
-
-        // 删除数据
-        await collection.deleteOne({_id: dataOld._id})
-
         try {
+            // 首先查询待删除的数据
+            const dataOld = await collection.findOne(para.query)
+            if(dataOld){
+                // 删除数据
+                await collection.deleteOne({_id: dataOld._id})
+            }
+
             return ({code: 0, message: '删除一条记录成功',
                 dataOld // 返回旧数据
             })
