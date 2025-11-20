@@ -69,11 +69,22 @@ async function GQuery({para, db}) {
         ].includes(para.operator)){
             return {code: 1, message: '查询对象不存在'}
         }
+
+        console.log("测试 ddd：",para.query);
+
         paraExec.query = para.query ? para.query : null
+
+        console.log("测试 eee：",paraExec.query);
+
         if(paraExec.query && para.schema){
             // 数据类型一致性强制
-            paraExec.query = schema.DTCE({data: para.query, schema: para.schema})
+            paraExec.query = schema.DTCE({data: paraExec.query, schema: para.schema})
+
+            console.log("测试 eee：",paraExec.query);
+
         }
+
+        console.log("测试 fff：",paraExec.query);
 
         paraExec.limit = para.limit ? para.limit : 0 // 页记录数
         paraExec.skip = para.skip ? para.skip : 0 // 跳过记录数
