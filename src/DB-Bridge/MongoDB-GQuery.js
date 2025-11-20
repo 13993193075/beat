@@ -58,7 +58,7 @@ async function GQuery({para, db}) {
         paraExec.operator = para.operator
 
         // 查询对象
-        if(!para.query || [
+        if(!para.query || ![
             "find",
             "findOne",
             "countDocuments",
@@ -134,10 +134,11 @@ async function GQuery({para, db}) {
 
 // 泛查询 - 执行
 async function exec({para, db}) {
+    const collection = db.collection(para.tblName)
+
     // 查询多条记录
     if (para.operator === 'find') {
         try {
-            const collection = db.collection(para.tblName)
             // 同步返回游标
             const cursor = collection.find(para.query)
             if (para.limit > 0) {
