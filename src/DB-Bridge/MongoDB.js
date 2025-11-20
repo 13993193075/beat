@@ -5,15 +5,12 @@ async function connectMongoDB({connectionUrl, options = {
     maxPoolSize: 10, // 默认100
     minPoolSize: 2, // 根据并发量调整
     serverSelectionTimeoutMS: 5000, // 5秒后停止尝试连接
-    // 推荐使用这两个选项以避免警告
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
 }}) {
     try {
         const client = new MongoClient(connectionUrl, options);
         // 实际建立连接，并初始化连接池
         await client.connect();
-        console.log('MongoDB 连接池已初始化并连接成功');
+        console.log('MongoDB 连接池已初始化并连接成功：', connectionUrl);
         return client;
     } catch (error) {
         console.error('MongoDB 连接失败:', error);
@@ -39,6 +36,7 @@ async function closeConnection(clientInstance) {
     if (clientInstance) {
         await clientInstance.close();
         console.log('MongoDB 连接池已关闭');
+        process.exit(0)
     }
 }
 
