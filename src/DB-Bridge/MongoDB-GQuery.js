@@ -58,7 +58,7 @@ async function GQuery({para, db}) {
         paraExec.operator = para.operator
 
         // 查询对象
-        if(!para.query || ![
+        if(!para.query && [
             "find",
             "findOne",
             "countDocuments",
