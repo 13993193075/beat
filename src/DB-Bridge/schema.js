@@ -10,33 +10,30 @@ import {unclassified as beanUnclass} from '@yoooloo42/bean'
 function DTCE({data, TypeFromSchema, schema}){
     if(beanUnclass.deepClone.typeOfValue(data) === 'array'){
         let arr = []
-        for (let i in data) {
-            arr.push(DTCE({data: i, TypeFromSchema: TypeFromSchema ? TypeFromSchema : null, schema}))
+        for (let i=0; i<data.length; i++) {
+            arr.push(DTCE({data: data[i], TypeFromSchema, schema}))
         }
         return arr
     }
 
-    if(beanUnclass.deepClone.typeOfValue(data) === 'object'){
+    if(beanUnclass.deepClone.typeOfValue(data) === 'object' && !(data instanceof ObjectId)){
         let obj = {}
         for (let i in data) {
-            if (obj.hasOwnProperty(i)) {
+            if (data.hasOwnProperty(i)) {
+                // i 匹配表模型中的字段名
                 if (Object.keys(schema).includes(i)) {
-                    // i 匹配表模型中的字段名
-                    obj[i] = DTCE({data: i, TypeFromSchema: schema[i].type, schema})
+
+                    obj[i] = DTCE({data: data[i], TypeFromSchema: schema[i].type, schema})
                 } else {
-                    obj[i] = DTCE({data: i, TypeFromSchema: TypeFromSchema ? TypeFromSchema : null, schema})
+                    obj[i] = DTCE({data: data[i], TypeFromSchema, schema})
                 }
             }
         }
-        return obj
+        return Object.assign(data, obj)
     }
 
-    if (data === undefined) {
+    if (data === null || data === undefined) {
         return null
-    }
-
-    if (TypeFromSchema === 'mongodb.id') {
-        return new ObjectId('' + data)
     }
 
     if (TypeFromSchema === 'string') {
@@ -63,6 +60,14 @@ function DTCE({data, TypeFromSchema, schema}){
             return true
         }
         return false
+    }
+
+    if(data instanceof ObjectId){
+        return data
+    }
+
+    if (TypeFromSchema === 'mongodb.id') {
+        return new ObjectId('' + data)
     }
 
     return data
