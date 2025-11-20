@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42d741df-1067-49c6-9b0f-02242e70a4df" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DB-Bridge/MongoDB-GQuery.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/DB-Bridge/MongoDB-GQuery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DB-Bridge/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/DB-Bridge/schema.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -50,15 +48,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="cjs" value="37" />
-          <entry key="js" value="11333" />
-          <entry key="json" value="185" />
+          <entry key="js" value="11372" />
+          <entry key="json" value="186" />
           <entry key="txt" value="158" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JSON" value="185" />
-          <entry key="JavaScript" value="11333" />
+          <entry key="JSON" value="186" />
+          <entry key="JavaScript" value="11372" />
           <entry key="PLAIN_TEXT" value="195" />
         </counts>
       </usages-collector>
@@ -69,17 +67,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DB-Bridge/MongoDB-GQuery.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="82" column="31" selection-start-line="82" selection-start-column="31" selection-end-line="82" selection-end-column="31" />
+            <state relative-caret-position="280">
+              <caret line="136" column="23" selection-start-line="136" selection-start-column="21" selection-end-line="136" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DB-Bridge/schema.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1160">
-              <caret line="41" column="34" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="34" />
+            <state relative-caret-position="145">
+              <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
               <folding>
                 <element signature="e#51#83#0" expanded="true" />
               </folding>
@@ -87,7 +85,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="38">
@@ -135,8 +133,8 @@
       <find>delete</find>
       <find>查询对象不存在</find>
       <find>para.update</find>
-      <find>测试</find>
       <find>DTCE</find>
+      <find>测试</find>
     </findStrings>
     <replaceStrings>
       <replace>cellphone</replace>
@@ -169,6 +167,7 @@
     <dirStrings>
       <dir>C:\ly\beat\src\libs</dir>
       <dir>C:\ly\beat\src</dir>
+      <dir>C:\ly\beat\src\DB-Bridge</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -226,8 +225,8 @@
         <option value="$PROJECT_DIR$/src/FileDB/ImageSave.js" />
         <option value="$PROJECT_DIR$/src/DB-Bridge/MongoDB.js" />
         <option value="$PROJECT_DIR$/src/DB-Bridge/schema.js" />
-        <option value="$PROJECT_DIR$/src/DB-Bridge/MongoDB-GQuery.js" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/DB-Bridge/MongoDB-GQuery.js" />
       </list>
     </option>
   </component>
@@ -402,12 +401,12 @@
       <workItem from="1763620637557" duration="305000" />
       <workItem from="1763621482109" duration="1403000" />
       <workItem from="1763630644180" duration="884000" />
-      <workItem from="1763645351190" duration="5051000" />
+      <workItem from="1763645351190" duration="5807000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="310322000" />
+    <option name="totallyTimeSpent" value="311078000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="3" y="-1088" width="1936" height="1056" extended-state="6" />
@@ -702,27 +701,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DB-Bridge/schema.js">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1160">
-          <caret line="41" column="34" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="34" />
-          <folding>
-            <element signature="e#51#83#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="38">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DB-Bridge/MongoDB-GQuery.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="82" column="31" selection-start-line="82" selection-start-column="31" selection-end-line="82" selection-end-column="31" />
+        <state relative-caret-position="280">
+          <caret line="136" column="23" selection-start-line="136" selection-start-column="21" selection-end-line="136" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/src/DB-Bridge/schema.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        <state relative-caret-position="145">
+          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+          <folding>
+            <element signature="e#51#83#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

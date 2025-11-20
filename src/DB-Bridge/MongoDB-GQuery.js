@@ -70,21 +70,17 @@ async function GQuery({para, db}) {
             return {code: 1, message: '查询对象不存在'}
         }
 
-        console.log("测试 ddd：",para.query);
-
         paraExec.query = para.query ? para.query : null
-
-        console.log("测试 eee：",paraExec.query);
-
         if(paraExec.query && para.schema){
+
+            console.log("测试 - beat - 000", paraExec.query);
+
             // 数据类型一致性强制
             paraExec.query = schema.DTCE({data: paraExec.query, schema: para.schema})
 
-            console.log("测试 eee：",paraExec.query);
+            console.log("测试 - beat - 111", paraExec.query);
 
         }
-
-        console.log("测试 fff：",paraExec.query);
 
         paraExec.limit = para.limit ? para.limit : 0 // 页记录数
         paraExec.skip = para.skip ? para.skip : 0 // 跳过记录数
@@ -118,16 +114,18 @@ async function GQuery({para, db}) {
             }
         }
 
-        console.log("测试 aaa：",para.update);
-
         // 数据更新对象
         paraExec.update = para.update ? para.update : null
 
-        console.log("测试 bbb：",paraExec.update);
-
         if(paraExec.update && para.schema){
+
+            console.log("测试 - beat - 222", paraExec.update);
+
             // 数据类型一致性强制
             paraExec.update = schema.DTCE({data: paraExec.update, schema: para.schema})
+
+            console.log("测试 - beat - 333", paraExec.update);
+
         }
         if (paraExec.operator === 'updateMany' || paraExec.operator === 'updateOne') {
             // 附加原子操作符：$set
@@ -136,7 +134,7 @@ async function GQuery({para, db}) {
             }
         }
 
-        console.log("测试 ccc：",paraExec.update);
+        console.log("测试 - beat - 444", paraExec.update);
 
         // updateMany, updateOne 未查中：插入新记录
         paraExec.upsert = !!para.upsert
