@@ -18,7 +18,7 @@ function DTCE({data, TypeFromSchema, schema}){
 
     if(beanUnclass.deepClone.typeOfValue(data) === 'object'){
         let obj = {}
-        for (let i in obj) {
+        for (let i in data) {
             if (obj.hasOwnProperty(i)) {
                 if (Object.keys(schema).includes(i)) {
                     // i 匹配表模型中的字段名
