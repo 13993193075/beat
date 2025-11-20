@@ -107,11 +107,16 @@ async function GQuery({para, db}) {
             }
         }
 
+        console.log("测试 aaa：",para.update);
+
         // 数据更新对象
         paraExec.update = para.update ? para.update : null
+
+        console.log("测试 bbb：",paraExec.update);
+
         if(paraExec.update && para.schema){
             // 数据类型一致性强制
-            paraExec.update = schema.DTCE({data: para.update, schema: para.schema})
+            paraExec.update = schema.DTCE({data: paraExec.update, schema: para.schema})
         }
         if (paraExec.operator === 'updateMany' || paraExec.operator === 'updateOne') {
             // 附加原子操作符：$set
@@ -119,6 +124,8 @@ async function GQuery({para, db}) {
                 paraExec.update = {$set: paraExec.update}
             }
         }
+
+        console.log("测试 ccc：",paraExec.update);
 
         // updateMany, updateOne 未查中：插入新记录
         paraExec.upsert = !!para.upsert
