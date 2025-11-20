@@ -7,7 +7,7 @@ import {unclassified as beanUnclass} from '@yoooloo42/bean'
 /**
  * @return {null}
  */
-function DTCE({data, TypeFromSchema, schema}){
+function DTCE({data, TypeFromSchema = null, schema}){
     if(beanUnclass.deepClone.typeOfValue(data) === 'array'){
         let arr = []
         for (let i in data) {
@@ -18,7 +18,7 @@ function DTCE({data, TypeFromSchema, schema}){
 
     if(beanUnclass.deepClone.typeOfValue(data) === 'object'){
         let obj = {}
-        for (let i in obj) {
+        for (let i in data) {
             if (Object.keys(schema).includes(i)) {
                 // i 匹配表模型中的字段名
                 obj[i] = DTCE({data: i, TypeFromSchema: schema[i].type, schema})
