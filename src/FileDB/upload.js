@@ -102,7 +102,7 @@ async function init({destination, fileSize, fileMimetype}){
  * @param {object} options - 配置选项
  */
 async function holdSingle(request, response, {
-    destination = 'uploads', // 项目执行的相对路径
+    destination = 'uploads', // 默认项目执行的相对路径
     fileSize = 1024 * 1024 * 1, // 默认 1MB
     fileMimetype = [
         'image/jpeg',
@@ -121,9 +121,10 @@ async function holdSingle(request, response, {
         // 成功，检查文件信息是否在请求对象中
         if(result.request.file && result.request.file.filename){
             return {code: 0, message: '上传成功',
-                file: result.request.file
+                file: result.request.file,
+                data: result.request.body
                 /* file中的关键信息
-                * destination: 文件在服务器上存储的目录路径
+                * destination: 文件在服务器上存储的文件夹路径
                 * filename: 文件在服务器上存储时的新名称（通常是 Multer 自动生成的随机字符串或在 storage 配置中定义的名称）
                 * path: 文件的完整路径（destination + filename）
                 * */
@@ -166,7 +167,8 @@ async function holdArray(request, response, {
         // 成功，检查文件列表是否在请求对象中
         if(result.request.files && result.request.files.length > 0){
             return {code: 0, message: '上传成功',
-                files: result.request.files
+                files: result.request.files,
+                data: result.request.body
             };
         } else {
             return {code: 1, message: '上传失败或未选择文件'};
