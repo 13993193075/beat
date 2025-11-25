@@ -1,85 +1,97 @@
+import fs from 'fs'
 import path from 'path'
 
 /**
- * 将本地文件系统路径转换为可访问的Web URL。
- * * @param filePath - 待转换的本地文件系统绝对路径或相对路径。
- * @param fileRootPath - 文件在服务器上的根存储目录，对应URL中的基础路径之前的部分。
- * 例如: "/Users/user/project/uploads" 或 "D:\\project\\uploads"
- * @param baseUrl - Web访问的基础URL，对应文件路径中的根存储目录。
+ * 将本地文件夹路径转换为可访问的Web URL
+ * @param folder - 待转换的本地文件夹路径
+ * @param folderPrefix - 文件夹前缀
+ * 例如: "/Users/user/project/uploads" 或 "D:\project\uploads"
+ * @param urlPrefix - Web URL前缀
  * 例如: "https://api.example.com/files"
- * @returns 转换后的Web URL字符串。
+ * @returns 转换后的Web URL
  */
-function pathToUrl(filePath, fileRootPath, baseUrl) {
-    // 1. 统一路径分隔符 (解决 Windows/Linux 路径分隔符差异)
-    //    将所有 \ 替换为 /
-    const normalizedPath = filePath.replace(/\\/g, '/');
-    const normalizedRootPath = fileRootPath.replace(/\\/g, '/');
+function folderToUrl({folder, folderPrefix, urlPrefix}) {
+    // 1. 统一文件夹分隔符 (解决 Windows/Linux 文件夹分隔符差异)
+    // 将所有 \ 替换为 /
+    const folderNormalized = folder.replace(/\\/g, '/');
+    const folderPrefixNormalized = folderPrefix.replace(/\\/g, '/');
 
-    // 2. 确保 baseUrl 以 / 结尾 (方便拼接)
-    const normalizedBaseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+    // 2. 确保 urlPrefix 以 / 结尾 (方便拼接)
+    const urlPrefixNormalized = urlPrefix.endsWith('/') ? urlPrefix.slice(0, -1) : urlPrefix;
 
-    // 3. 检查文件路径是否包含文件存储根目录
-    if (!normalizedPath.startsWith(normalizedRootPath)) {
+    // 3. 检查文件夹路径是否包含文件夹前缀
+    if (!folderNormalized.startsWith(folderPrefixNormalized)) {
         // 如果文件路径不在根目录下，可能需要抛出错误或返回空
-        console.error(`文件路径不在指定的根目录中：${filePath}`);
+        console.error(`文件夹路径不在指定的根目录中：${folder}`);
         return null;
     }
 
-    // 4. 提取相对路径部分 (这是路径和URL的"第二部分")
-    //    从文件路径中移除根存储目录
-    let relativePath = normalizedPath.substring(normalizedRootPath.length);
+    // 4. 提取文件夹相对路径部分 (这是文件夹路径和URL共同的"第二部分")
+    // 从文件夹路径中移除前缀
+    let pathRelative = folderNormalized.substring(folderPrefixNormalized.length);
 
     // 5. 确保相对路径以 / 开头，方便拼接
-    if (!relativePath.startsWith('/')) {
-        relativePath = '/' + relativePath;
+    if (!pathRelative.startsWith('/')) {
+        pathRelative = '/' + pathRelative;
     }
 
     // 6. 组合 Web URL
-    //    Web URL = ${Web访问基础URL} + ${相对路径部分}
-    const webUrl = normalizedBaseUrl + relativePath;
+    // Web URL = ${Web访问基础URL} + ${相对路径部分}
+    const url = urlPrefixNormalized + pathRelative;
 
-    return webUrl;
+    return url;
 }
 
 /**
- * 将Web URL转换回本地文件系统路径。
- * * @param webUrl - 待转换的Web URL。
- * @param fileRootPath - 文件在服务器上的根存储目录。
- * @param baseUrl - Web访问的基础URL。
+ * 将Web URL转换为本地文件夹路径
+ * @param url - 待转换的Web URL
+ * @param urlPrefix - URL前缀（Web访问的基础URL）
+ * @param folderPrefix - 文件夹前缀
  * @returns string
  */
-function urlToPath(webUrl, baseUrl, fileRootPath) {
-    // 1. 确保 baseUrl 以 / 结尾 (方便统一处理)
-    const normalizedBaseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+function urlToFolder({url, urlPrefix, folderPrefix}) {
+    // 1. 确保 urlPrefix 以 / 结尾 (方便统一处理)
+    const urlPrefixNormalized = urlPrefix.endsWith('/') ? urlPrefix.slice(0, -1) : urlPrefix;
 
     // 2. 检查URL是否包含Web访问的基础URL
-    if (!webUrl.startsWith(normalizedBaseUrl)) {
-        console.error(`URL不包含指定的Web基础路径：${webUrl}`);
+    if (!url.startsWith(urlPrefixNormalized)) {
+        console.error(`URL不包含指定的Web基础路径：${url}`);
         return null;
     }
 
     // 3. 提取相对路径部分
-    let relativePath = webUrl.substring(normalizedBaseUrl.length);
+    let pathRelative = url.substring(urlPrefixNormalized.length);
 
-    // 4. 确保文件根目录不以 / 结尾 (Node.js的path模块更倾向于不以斜杠结尾)
-    const normalizedRootPath = fileRootPath.endsWith('/') ? fileRootPath.slice(0, -1) : fileRootPath;
+    // 4. 确保文件夹前缀不以 / 结尾 (Node.js的path模块更倾向于不以斜杠结尾)
+    const folderPrefixNormalized = folderPrefix.endsWith('/') ? folderPrefix.slice(0, -1) : folderPrefix;
 
-    // 5. 组合文件路径
+    // 5. 组合文件夹路径
     // 注意：在组合路径时，最好使用 Node.js 内置的 path 模块，以确保跨平台兼容性
-
     // path.join 会自动处理多余的斜杠，并使用当前系统的分隔符（Windows下会使用\）
     // 如果您确定只需要 / 分隔符（例如在容器或Linux环境中），可以直接使用字符串拼接
-    // return normalizedRootPath + relativePath;
+    // const folder folderPrefixNormalized + pathRelative;
+
+    const folder = path.join(folderPrefixNormalized, pathRelative);
 
     // 使用 path 模块（推荐）
-    return path.join(normalizedRootPath, relativePath);
+    return folder
+}
+
+// 文件转移
+async function fileMove({folderOld, folderNew}){
+    try {
+        await fs.rename(folderOld, folderNew)
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 export {
-    pathToUrl,
-    urlToPath
+    folderToUrl,
+    urlToFolder
 }
 export default {
-    pathToUrl,
-    urlToPath
+    folderToUrl,
+    urlToFolder,
+    fileMove
 }
