@@ -1,6 +1,46 @@
 import fs from 'fs'
 import path from 'path'
 
+// 文件转移
+async function fileMove({folderOld, folderNew}){
+    try {
+        await fs.rename(folderOld, folderNew)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+// 文件删除
+async function fileDelete({folder}){
+    try {
+        await fs.unlink(folder)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+// 创建文件夹
+async function create({folder}){
+    try{
+        await fs.mkdir(folder, { recursive: true })
+    }catch(err){
+        console.log(err)
+    }
+}
+
+// 文件路径解析
+function pathParse({folder}){
+    return path.parse(folder)
+    /*
+    属性名 | 描述 | 示例值 (针对 /home/user/dir/file.ext)
+        root | 路径的根目录 | /
+        dir | 文件所在的完整目录路径 | /home/user/dir
+        base | 文件名和扩展名的完整部分（basename） | file.ext
+        ext | 文件的扩展名（包括点 .） | .ext
+        name | 文件名（不包括扩展名） | file
+    */
+}
+
 /**
  * 将本地文件夹路径转换为可访问的Web URL
  * @param folder - 待转换的本地文件夹路径
@@ -77,21 +117,15 @@ function urlToFolder({url, urlPrefix, folderPrefix}) {
     return folder
 }
 
-// 文件转移
-async function fileMove({folderOld, folderNew}){
-    try {
-        await fs.rename(folderOld, folderNew)
-    } catch (err) {
-        console.log(err)
-    }
-}
-
 export {
     folderToUrl,
     urlToFolder
 }
 export default {
+    fileMove,
+    fileDelete,
+    create,
+    pathParse,
     folderToUrl,
     urlToFolder,
-    fileMove
 }
