@@ -7,7 +7,7 @@
     <list default="true" id="42d741df-1067-49c6-9b0f-02242e70a4df" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FileDB/richtext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileDB/richtext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileDB/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileDB/upload.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -370,6 +370,8 @@
       <workItem from="1764093421725" duration="15000" />
       <workItem from="1764093472140" duration="37000" />
       <workItem from="1764137887126" duration="4105000" />
+      <workItem from="1764261932736" duration="36000" />
+      <workItem from="1764322953589" duration="349000" />
     </task>
     <servers />
   </component>

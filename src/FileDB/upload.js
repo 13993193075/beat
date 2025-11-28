@@ -85,7 +85,7 @@ async function init({destination, fileSize, fileMimetype}){
         limits: { fileSize },
         // 文件过滤
         fileFilter: (req, file, cb) => {
-            if (fileMimetype.includes(file.mimetype)) {
+            if (!fileMimetype || fileMimetype.length === 0 || fileMimetype.includes(file.mimetype)) {
                 cb(null, true); // 接受文件
             } else {
                 // 拒绝文件，并返回一个错误 (已本地化为中文)
@@ -104,10 +104,7 @@ async function init({destination, fileSize, fileMimetype}){
 async function holdSingle(request, response, {
     destination = 'uploads', // 默认项目执行的相对路径
     fileSize = 1024 * 1024 * 1, // 默认 1MB
-    fileMimetype = [
-        'image/jpeg',
-        'image/png'
-    ],
+    fileMimetype = [],
     fieldName = 'file' // 字段名
 }){
     const upload = await init({destination, fileSize, fileMimetype});
@@ -149,10 +146,7 @@ async function holdSingle(request, response, {
 async function holdArray(request, response, {
     destination = 'uploads',
     fileSize = 1024 * 1024 * 1, // 默认 1MB
-    fileMimetype = [
-        'image/jpeg',
-        'image/png'
-    ],
+    fileMimetype = [],
     fieldName = 'files',
     maxCount = 10
 }){
