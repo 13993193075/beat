@@ -29,6 +29,7 @@ async function imageAppend (para) {
         '[' + ('fieldIndex' in para ? para.fieldIndex : 0) + "]" +
         '/' + thisTime.getFullYear() +
         '/' + (thisTime.getMonth() + 1)
+
     // 数据库文件名：数据单元ID + 表名 + 字段名 + 多文件索引 + 数据ID + 随机数 + 扩展名
     const dbFileName = (para.dataunitId ? para.dataunitId + '.' : '') +
         para.tblName + '.' +
@@ -36,7 +37,7 @@ async function imageAppend (para) {
         ('fieldIndex' in para ? para.fieldIndex : 0) + '.' +
         para.dataId + '.' +
         Math.floor((999999 - 0) * Math.random() + 0) +
-        FileMove.pathParse(para.uploaded).ext
+        FileMove.pathParse({folder: para.uploaded}).ext
 
     // 上传文件路径
     const uploadFilePath = para.uploaded.replace(para.pathHead.uploadUrl, para.pathHead.uploadFolder)
@@ -48,6 +49,7 @@ async function imageAppend (para) {
     await FileMove.create({folder: dbFolder})
     // 已上传文件转存至数据库文件夹
     await FileMove.fileMove({folderOld: uploadFilePath, folderNew: dbFilePath})
+
     // 返回数据库url
     return dbUrl
 }
@@ -62,11 +64,13 @@ async function imageDelete (para) {
     if (!para.url) {
         return
     }
-    await FileMove.fileDelete(FileMove.urlToFolder({
-        url: para.url,
-        urlPrefix: para.pathHead.dbUrl,
-        folderPrefix: para.pathHead.dbFolder
-    }))
+    await FileMove.fileDelete({
+        folder: FileMove.urlToFolder({
+            url: para.url,
+            urlPrefix: para.pathHead.dbUrl,
+            folderPrefix: para.pathHead.dbFolder
+        })
+    })
 }
 
 // 图片更新
@@ -244,7 +248,7 @@ async function richtextAppend (para) {
         '/' + (thisTime.getMonth() + 1);
 
     // 创建数据库文件夹
-    await FileMove.create(dbFolder)
+    await FileMove.create({folder: dbFolder})
     for (let i in arrSrc) {
         let uploadFilePath = FileMove.urlToFolder({
             url: arrSrc[i],
@@ -278,11 +282,13 @@ async function richtextDelete (para) {
 
     let arrSrc = Richtext.extractAllSrc(para.richtext)
     for (let i in arrSrc) {
-        await FileMove.fileDelete(FileMove.urlToFolder({
-            url: arrSrc[i],
-            urlPrefix: para.pathHead.dbUrl,
-            folderPrefix: para.pathHead.dbFolder
-        }))
+        await FileMove.fileDelete({
+            folder: FileMove.urlToFolder({
+                url: arrSrc[i],
+                urlPrefix: para.pathHead.dbUrl,
+                folderPrefix: para.pathHead.dbFolder
+            })
+        })
     }
 }
 
@@ -352,11 +358,13 @@ async function richtextUpdate (para) {
     for (let i in arrSrcOld) {
         if (arrSrcOld [i]) {
             // 删除垃圾文件
-            await FileMove.fileDelete(FileMove.urlToFolder({
-                url: arrSrcOld [i],
-                urlPrefix: para.pathHead.dbUrl,
-                folderPrefix: para.pathHead.dbFolder
-            }))
+            await FileMove.fileDelete({
+                folder: FileMove.urlToFolder({
+                    url: arrSrcOld [i],
+                    urlPrefix: para.pathHead.dbUrl,
+                    folderPrefix: para.pathHead.dbFolder
+                })
+            })
         }
     }
 

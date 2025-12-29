@@ -1,5 +1,5 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs/promises'
+import path from 'node:path'
 
 // 文件转移
 async function fileMove({folderOld, folderNew}){
