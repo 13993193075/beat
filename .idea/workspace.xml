@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="42d741df-1067-49c6-9b0f-02242e70a4df" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FileDB/ImageSave.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileDB/ImageSave.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -379,6 +377,8 @@
       <workItem from="1766971384286" duration="77000" />
       <workItem from="1766972872079" duration="6288000" />
       <workItem from="1767006432162" duration="3164000" />
+      <workItem from="1767034211004" duration="15000" />
+      <workItem from="1767034243319" duration="22000" />
     </task>
     <servers />
   </component>
