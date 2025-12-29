@@ -82,7 +82,6 @@ async function imageUpdate (para) {
     // para.pathHead.uploadUrl 上传URL
     // para.uploaded 已上传文件的URL
     // para.old 原文件的URL
-    // para.deleteIfNotUploaded 如果没有上传新文件，那么删除原文件
 
     // para.dataunitId 数据单元ID
     // para.tblName 表名
@@ -90,7 +89,11 @@ async function imageUpdate (para) {
     // para.fieldIndex 多文件索引
     // para.dataId 数据ID
 
-    if (!!para.uploaded || para.deleteIfNotUploaded === true || para.deleteIfNotUploaded === 'true') {
+    if (para.uploaded === para.old) {
+        return (para.old)
+    }
+
+    if(para.old){
         await imageDelete({
             pathHead: {
                 dbFolder: para.pathHead.dbFolder,
@@ -100,7 +103,7 @@ async function imageUpdate (para) {
         })
     }
     if (!para.uploaded) {
-        return (para.old)
+        return ''
     }
 
     return await imageAppend({
