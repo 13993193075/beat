@@ -1,6 +1,6 @@
 {
     "name": "@yoooloo42/beat",
-    "version": "1.0.87",
+    "version": "1.0.88",
     "description": "",
     "type": "module",
     "main": "dist/index.cjs.js",
@@ -25,7 +25,7 @@
         "@alicloud/ocr20191230": "^4.0.1",
         "@alicloud/openapi-client": "^0.4.15",
         "@alicloud/pop-core": "^1.8.0",
-        "@yoooloo42/bean": "^1.0.34",
+        "@yoooloo42/bean": "^1.0.35",
         "aliyun-api-gateway": "^1.1.6",
         "axios": "^1.13.2",
         "cheerio": "^1.1.2",
