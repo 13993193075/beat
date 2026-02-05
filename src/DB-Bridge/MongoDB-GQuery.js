@@ -32,7 +32,7 @@ async function GQuery({para, db}) {
         }
 
         // 执行参数
-        let paraExec = {}
+        const paraExec = {}
 
         // 表名
         if(!para.tblName){
@@ -97,13 +97,13 @@ async function GQuery({para, db}) {
                 paraExec.reference = paraExec.reference.concat(populate) // 并入paraExec.reference
             }
         }
-
+        
         // 输出字段
-        paraExec.outFields = para.outFields ? {} : null
-        if(para.outFields){
+        paraExec.showFields = para.showFields ? {} : null
+        if(para.showFields){
             // mongodb语法转义示例：{"_id": 1, "name": 1}
-            for (let i = 0; i < para.outFields.length; i++) {
-                paraExec.outFields[para.outFields[i]] = 1
+            for (let i = 0; i < para.showFields.length; i++) {
+                paraExec.showFields[para.showFields[i]] = 1
             }
         }
 
